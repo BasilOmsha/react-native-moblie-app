@@ -1,15 +1,17 @@
-require("dotenv").config({ path: "./.env" });
+// server.js
 const express = require("express");
 const app = express();
+const dotenv = require("dotenv");
+dotenv.config();
 
-app.use(express.json());
+// Import the routes for flight search
+const flightSearchRoutes = require("./routes/flightSearch");
 
 // Start the server
 const port = process.env.PORT || 3001;
-app.get("/", (req, res) => {
-  // Corrected order of (req, res)
-  res.json("hello world");
-});
+
+app.use("/search", flightSearchRoutes);
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
