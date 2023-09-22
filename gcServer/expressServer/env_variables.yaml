@@ -1,2 +1,0 @@
-env_variables:
-  MONGODB_URI: 'mongodb+srv://basilomsha:Hadalazemsaab284695847..kC@cluster0.io3wenf.mongodb.net/flightBookingApp?retryWrites=true&w=majority'
