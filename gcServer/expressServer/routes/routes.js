@@ -7,10 +7,12 @@ const signupController = require('../controllers/signup.js');
 
 
 // Signup page
-router.get('/registration', signupController.signupForm);
+router.get('/rest/services/registration', signupController.signupForm);
 
-// Signup function
-router.post('/signup',  signupController.signup);
+// JSON Signup function
+router.post('/rest/services/signup',  signupController.signup);
+//  application/x-www-form-urlencoded Signup function
+router.post('/rest/services/signup2',  signupController.signup);
 
 
 
