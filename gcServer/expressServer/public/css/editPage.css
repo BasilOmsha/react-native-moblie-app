@@ -1,0 +1,30 @@
+.editCenter{
+    margin: auto;
+    width: 20%;
+}
+.editCenter textarea{
+    padding: 5px;
+    font-size: 1.2em;
+    width: 100%;
+    border: 1px solid black;
+}
+.editCenter label{
+    margin-top: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+
+}
+.editCenter button{
+    cursor: pointer;
+    background-color: brown;
+    color: white;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    text-decoration: none;
+    border: none;
+}
+.editCenter button:hover{
+    color: white;
+    text-decoration: none;
+    background-color: rgb(0, 0, 0);
+  }
