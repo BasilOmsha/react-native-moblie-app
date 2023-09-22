@@ -1,0 +1,128 @@
+.edit-profile-main-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.edit-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #2546f0;
+    max-width: 100%;
+    min-width: 100%;
+    color: #ffffff;
+    font-size: large;
+}
+
+.edit-instructions-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgb(101, 165, 42); */
+    max-width: 700px;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgb(227, 230, 67); */
+    padding: 20px;
+    /* max-width: 400px;
+    margin: 0 auto; */
+}
+
+.edit-form-row {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    /* background-color: antiquewhite; */
+    margin-bottom: 1rem;
+    max-width: 800px;
+}
+
+.edit-field-lables {
+    font-weight: bold;
+    min-width: 20%;
+    text-align: left;
+    margin-right: 5px;
+    /* background-color: aqua; */
+}
+
+.edit-field-inputs {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    min-width: 60%;
+    /* background-color: aqua; */
+}
+
+.edit-field-inputs2 {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    min-width: 20%;
+    margin-bottom: 5px;
+    /* flex: 1; */
+    /* background-color: aqua; */
+}
+
+.optional-field {
+    color: #4d4c4c;
+    font-size: 12px;
+}
+
+.edit-err {
+    display: flex;
+    flex-direction: column;
+    color: #c44601;
+    font-weight: bold;
+    font-size: 14px;
+    /* margin-top: 5px; */
+    /* margin-left: 1rem; */
+    min-width: 20%;
+}
+
+.editBtn {
+    cursor: pointer;
+    border:0 ;
+    border-radius: 5px;
+    font-weight: 600;
+    margin: 0 80px;
+    width: 200px;
+    padding: 10px 0;
+    box-shadow: 0 0 20px #6ce74733;     
+    background-color: #2546f0;
+    transition: 0.4s;
+    color: #fff;
+    margin-bottom: 5px;
+}
+.bck-btn{
+    background-color: #265429;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    min-width: 200px;
+    margin-bottom: 5px;
+}
+.editBtn:focus,
+.edit-field-inputs:focus,
+.edit-field-inputs2:focus {
+    outline: 2px solid #0000ff;
+}   

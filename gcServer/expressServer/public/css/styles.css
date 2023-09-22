@@ -1,0 +1,52 @@
+h1 {
+
+  font-size: 30px;
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  /*font-family: 'Bruno Ace SC', cursive !important;*/
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #b1bec7 !important;
+  color: #333;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin: 0 auto;
+  padding-top: 2em;
+}
+
+.navbar ul {
+  margin-left: 5rem;
+  font-size: 20px;
+  /* text-transform: uppercase; */
+}
+
+.navbar-brand {
+  font-family: 'Bruno Ace SC', cursive;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: black !important;
+}
+
+.nav-item {
+  padding-right: 5rem;
+}
+
+.nav-item2 {
+  font-size: 0.85em;
+  margin-left:1rem;
+}
+
+a.nav-link:active {
+  text-decoration: underline !important;
+
+}
