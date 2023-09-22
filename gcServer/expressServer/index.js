@@ -2,8 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const handlebars = require("handlebars");
-const connectToDatabase = require('./connection/dbConnection.js');
-require('dotenv').config({ path: __dirname + '/./../../.env' })
+const connectToDatabase = require('./Connection/dbConnection.js');
 
 connectToDatabase();
 
@@ -21,5 +20,5 @@ app.engine('handlebars', exphbs.engine({
 }));
 app.set("view engine", "handlebars");
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`App listening port ${PORT}`));
