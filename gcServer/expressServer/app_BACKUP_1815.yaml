@@ -1,0 +1,6 @@
+runtime: nodejs20
+
+includes:
+  - env_variables.yaml
+
+
