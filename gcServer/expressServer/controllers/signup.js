@@ -33,7 +33,10 @@ const signup = async (req, res) => {
             // if (await checkEmail(email) === false) {
             const user = await User.insertMany(newUser);
             if (user) {
-                res.status(201).redirect("../services/registration");
+                 res.status(201).json({
+                    newUser,
+                    message: 'User added successfully'
+                });
                 console.log("user added successfully")
             } else {
                 res.status(400).send("something went wrong!");
