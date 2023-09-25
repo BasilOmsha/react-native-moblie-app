@@ -3,12 +3,12 @@ import {
     StyleSheet, TextInput, View, Text, Image, KeyboardAvoidingView, Keyboard, TouchableOpacity, ScrollView,
 } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { useUserContext } from '../components/UserContext';
-import { useSignupFormContext } from '../components/signupComponents/SignupLabelsContext';
-import { daysOfMonth, monthsInNumbers, years, genders } from '../components/signupComponents/DateData';
-import Loader from '../components/Loader';
-import SuccessModal from '../components/signupComponents/SuccessModal';
-import styles from '../styles/Style';
+import { useUserContext } from '../../services/UserContext';
+import { useSignupFormContext } from '../../services/signupServices/SignupLabelsContext';
+import { daysOfMonth, monthsInNumbers, years, genders } from '../../services/signupServices/DateData';
+import Loader from '../../services/Loader';
+import SuccessModal from '../../services/signupServices/SuccessModal';
+import styles from '../../styles/Style';
 
 const RegistrationScreen = ({ navigation }) => {
     const {
@@ -119,7 +119,7 @@ const RegistrationScreen = ({ navigation }) => {
             <ScrollView keyboardShouldPersistTaps="handled">
                 <View style={{ alignItems: 'center' }}>
                     <Image
-                        source={require('../assets/images/airplain.png')}
+                        source={require('../../assets/images/airplain.png')}
                         style={{
                             width: '50%',
                             height: 100,
