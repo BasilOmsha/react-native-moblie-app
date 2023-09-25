@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
+import {StyleSheet, Text, View, Modal, ActivityIndicator} from 'react-native';
 import loaderStyles from '../styles/LoaderStyle';
 
 const Loader = props => {
@@ -17,10 +17,11 @@ const Loader = props => {
         <View >
           <ActivityIndicator
             animating={true}
-            color="#000000"
+            color="#27aae2"
             size="large"
             style={loaderStyles.activityIndicator}
           />
+          <Text style={loaderStyles.indicatorTExtStyle}>Bending time and space...</Text>
         </View>
       </View>
     </Modal>
