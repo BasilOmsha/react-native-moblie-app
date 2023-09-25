@@ -1,7 +1,7 @@
 // Signup form styles
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const signupStyle = StyleSheet.create({
   mainSignupContainer: {
     flex: 1,
     backgroundColor: '#fff',
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
   },
-  
+
   dobContainer: {
     // backgroundColor: 'white',
     flexDirection: 'row',
@@ -135,6 +135,22 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 16,
   },
+  successTextStyle: {
+    color: '#000',
+    textAlign: 'center',
+    fontSize: 18,
+    padding: 30,
+  },
+  signupSuccessView: {
+    flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+  },
+  signupSunccessImgStyle: {
+    height: 150,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+  }
 });
 
-export default styles;
+export default signupStyle;

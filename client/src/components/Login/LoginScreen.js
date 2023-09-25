@@ -5,7 +5,7 @@ import {
 import { useUserContext } from '../../services/UserContext';
 import { useSignupFormContext } from '../components/signupServices/SignupLabelsContext';
 import Loader from '../../services/Loader';
-import styles from '../../styles/Style';
+import styles from '../../styles/SignupStyle';
 
 const LoginScreen = ({ navigation }) => {
     return (

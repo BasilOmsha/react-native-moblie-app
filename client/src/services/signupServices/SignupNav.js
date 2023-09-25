@@ -6,7 +6,7 @@ import RegistrationScreen from '../../components/Register/RegistrationScreen';
 import LoginScreen from '../../components/Login/LoginScreen';
 import { User } from '../UserContext';
 import { Labels } from './SignupLabelsContext';
-import styles from '../../styles/Style';
+import styles from '../../styles/SignupStyle';
 
 const Stack = createNativeStackNavigator();
 

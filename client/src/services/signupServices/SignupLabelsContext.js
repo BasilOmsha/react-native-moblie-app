@@ -1,7 +1,7 @@
 // Sigup Form Lables Handler
 import React, { createContext, useContext, useState } from 'react';
 import { Text } from 'react-native';
-import styles from '../../styles/Style';
+import styles from '../../styles/SignupStyle';
 import Loader from '../Loader';
 const SignupFormContext = createContext();
 

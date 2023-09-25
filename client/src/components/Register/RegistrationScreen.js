@@ -8,9 +8,10 @@ import { useSignupFormContext } from '../../services/signupServices/SignupLabels
 import { daysOfMonth, monthsInNumbers, years, genders } from '../../services/signupServices/DateData';
 import Loader from '../../services/Loader';
 import SuccessModal from '../../services/signupServices/SuccessModal';
-import styles from '../../styles/Style';
+import styles from '../../styles/SignupStyle';
 
 const RegistrationScreen = ({ navigation }) => {
+    
     const {
         firstname, firstnameInputHandler, lastname, lastnameInputHandler,
         email, emailInputHandler, password, passwordInputHandler, day, dayInputHandler, setDay, userObject,
@@ -105,6 +106,7 @@ const RegistrationScreen = ({ navigation }) => {
     const navToLogin = () => {
         navigation.navigate('Login');
         setIsRegistraionSuccess(false);
+        clearForm();
     }
 
     if (isRegistraionSuccess) {
@@ -205,7 +207,7 @@ const RegistrationScreen = ({ navigation }) => {
                         placeholder={!isFocusDay ? 'Select Day' : '...'}
                         searchPlaceholder="Search..."
                         onFocus={() => setIsFocusDay(true)}
-                        onBlur={() => setIsFocusDay(true)}
+                        onBlur={() => setIsFocusDay(false)}
                         onChange={item => {
                             setDay(item.value);
                             setIsFocusDay(false);
@@ -230,7 +232,7 @@ const RegistrationScreen = ({ navigation }) => {
                         placeholder={!isFocusMonth ? 'Select Month' : '...'}
                         searchPlaceholder="Search..."
                         onFocus={() => setIsFocusMonth(true)}
-                        onBlur={() => setIsFocusMonth(true)}
+                        onBlur={() => setIsFocusMonth(false)}
                         onChange={item => {
                             setMonth(item.value);
                             setIsFocusMonth(false);
@@ -255,7 +257,7 @@ const RegistrationScreen = ({ navigation }) => {
                         placeholder={!isFocusYear ? 'Select Year' : '...'}
                         searchPlaceholder="Search..."
                         onFocus={() => setIsFocusYear(true)}
-                        onBlur={() => setIsFocusYear(true)}
+                        onBlur={() => setIsFocusYear(false)}
                         onChange={item => {
                             setYear(item.value);
                             setIsFocusYear(false);
@@ -280,7 +282,7 @@ const RegistrationScreen = ({ navigation }) => {
                         placeholder={!isFocusGender ? 'Select Gender' : '...'}
                         searchPlaceholder="Search..."
                         onFocus={() => setIsFocusGender(true)}
-                        onBlur={() => setIsFocusGender(true)}
+                        onBlur={() => setIsFocusGender(false)}
                         onChange={item => {
                             setGender(item.value);
                             setIsFocusGender(false);
