@@ -106,7 +106,7 @@ const validation = async (req, res, next) => {
     const agevarify = await calcAge(month, day, year) // validate age
     const values = { firstname, lastname, email, password, paswdConfirm, month, day, year, gender };
     // res.render('adduser', { errors, values, agevarify });
-    res.json({ errors });
+    res.json({ errors, agevarify });
 };
 
 module.exports = {
