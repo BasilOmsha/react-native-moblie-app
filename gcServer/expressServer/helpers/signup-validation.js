@@ -42,6 +42,14 @@ const validateSignupForm =
             .trim()
             .notEmpty()
             .withMessage(`${year} is empty`)
+            .custom(async (value, { req }) => {
+                // Add age verification logic here
+                const ageVerify = await calcAge(req.body.month, req.body.day, value);
+                if (ageVerify) {
+                    throw new Error('You must be older than 13 to use our service');
+                }
+                return true;
+            })
             .escape(),
 
         body('email')
@@ -103,10 +111,13 @@ const validation = async (req, res, next) => {
     });
     console.log(errors);
     const { firstname, lastname, email, password, paswdConfirm, month, day, year, gender } = req.body;
-    const agevarify = await calcAge(month, day, year) // validate age
+//     const agevarify = await calcAge(month, day, year) // validate age
+//     if (agevarify) {
+//     errors['age'] = 'You must be older than 13 to use our service!';
+//   }
     const values = { firstname, lastname, email, password, paswdConfirm, month, day, year, gender };
-    // res.render('adduser', { errors, values, agevarify });
-    res.json({ errors, agevarify });
+    // res.render('adduser', { errors, values });
+    res.json({ errors });
 };
 
 module.exports = {
