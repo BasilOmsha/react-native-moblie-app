@@ -8,6 +8,9 @@ const { validateSignupForm, validation } = require('../helpers/signup-validation
 // Signup page
 router.get('/rest/services/registration', signupController.signupForm);
 
+// Validate client
+router.post('/rest/services/clientValidation', validateSignupForm, validation);
+
 // JSON Signup function
 router.post('/rest/services/signup', validateSignupForm, validation, signupController.signup);
 //  application/x-www-form-urlencoded Signup function

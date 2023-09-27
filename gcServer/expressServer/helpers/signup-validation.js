@@ -55,7 +55,7 @@ const validateSignupForm =
         body('email')
             .trim()
             .notEmpty()
-            .withMessage('E-mail field is empty')
+            .withMessage('Email field is empty')
             .isLength({ min: 1 })
             .withMessage('Email is too short')
             .normalizeEmail()
@@ -64,11 +64,11 @@ const validateSignupForm =
             .custom(async (email) => {
                 const user = await User.find({ email: email });
                 if (user.length > 0) {
-                    throw new Error('E-mail is already in use');
+                    throw new Error('Email is already in use');
                 }
                 return true;
             })
-            .withMessage('E-mail is already in use')
+            .withMessage('Email is already in use')
             .escape(),
 
         body('password')
@@ -82,7 +82,7 @@ const validateSignupForm =
                 minSymbols: 1,
                 minNumbers: 1
             })
-            .withMessage('Password must contain numbers, lowercase, uppercase, and symbols.')
+            .withMessage('Password must be at least 8 characters, contain numbers, lowercase, uppercase, and symbols.')
             .escape(),
 
         body('paswdConfirm')
