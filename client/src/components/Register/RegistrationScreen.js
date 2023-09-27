@@ -9,7 +9,7 @@ import { daysOfMonth, monthsInNumbers, years, genders } from '../../services/sig
 import Loader from '../../services/Loader';
 import SuccessModal from '../../services/signupServices/SuccessModal';
 import styles from '../../styles/SignupStyle';
-import { FormValidation, FormValidation1 } from '../../services/signupServices/FormValidation';
+import { FormValidation1 } from '../../services/signupServices/FormValidation';
 
 const RegistrationScreen = ({ navigation }) => {
 
@@ -59,7 +59,7 @@ const RegistrationScreen = ({ navigation }) => {
                         }}
                     />
                 </View>
-                {labelContext.errortext == 'The first name is empty' || labelContext.errortext == 'The first name is too short' ? <Text style={{ color: 'red', fontSize: 15, textAlign: 'left', marginLeft:40, marginLeft:40, marginBottom:-10, marginTop:10 }}>{labelContext.errortext}</Text> : null}
+                {labelContext.errortext == 'Firstname cannot be empty' || labelContext.errortext == 'The first name is too short' ? <Text style={{ color: 'red', fontSize: 15, textAlign: 'left', marginLeft:40, marginLeft:40, marginBottom:-10, marginTop:10 }}>{labelContext.errortext}</Text> : null}
                 <View style={styles.SectionStyle}>
                     {labelContext.renderLablFName()}
                     <TextInput

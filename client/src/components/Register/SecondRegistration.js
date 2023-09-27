@@ -9,7 +9,7 @@ import { daysOfMonth, monthsInNumbers, years, genders } from '../../services/sig
 import Loader from '../../services/Loader';
 import SuccessModal from '../../services/signupServices/SuccessModal';
 import styles from '../../styles/SignupStyle';
-import { FormValidation, FormValidation2 } from '../../services/signupServices/FormValidation';
+import { FormValidation2 } from '../../services/signupServices/FormValidation';
 
 const SecondRegistration = ({ navigation }) => {
     const userContext = useUserContext();
