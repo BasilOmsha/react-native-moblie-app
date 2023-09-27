@@ -29,13 +29,13 @@ const validateSignupForm =
         body(month)
             .trim()
             .notEmpty()
-            .withMessage(`${month} is empty,`)
+            .withMessage(`${month} is empty`)
             .escape(),
 
         body(day)
             .trim()
             .notEmpty()
-            .withMessage(`${day} is empty,`)
+            .withMessage(`${day} is empty`)
             .escape(),
 
         body(year)
