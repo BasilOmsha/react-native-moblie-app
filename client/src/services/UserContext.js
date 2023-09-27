@@ -11,6 +11,7 @@ export const User = ({ children }) => {
     const [lastname, setLastname] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [paswdConfirm, setConfirmPaswd] = useState();
     const [day, setDay] = useState();
     const [month, setMonth] = useState();
     const [year, setYear] = useState();
@@ -27,6 +28,9 @@ export const User = ({ children }) => {
     };
     const passwordInputHandler = (enteredText) => {
         setPassword(enteredText);
+    };
+    const confirmPaswdInputHandler = (enteredText) => {
+        setConfirmPaswd(enteredText);
     };
     const dayInputHandler = (enteredText) => {
         setDay(enteredText);
@@ -46,6 +50,7 @@ export const User = ({ children }) => {
         "lastname": lastname,
         "email": email,
         "password": password,
+        "paswdConfirm": paswdConfirm,
         "day": day,
         "month": month,
         "year": year,
@@ -55,7 +60,7 @@ export const User = ({ children }) => {
     return (
         <UserContext.Provider value={{
            firstname, firstnameInputHandler, lastname, lastnameInputHandler, email, emailInputHandler,
-           password, passwordInputHandler, day, setDay, dayInputHandler, month, setMonth, monthInputHandler, year, setYear, yearInputHandler, 
+           password, passwordInputHandler, paswdConfirm, confirmPaswdInputHandler, day, setDay, dayInputHandler, month, setMonth, monthInputHandler, year, setYear, yearInputHandler, 
            gender, setGender, genderInputHandler, userObject
         }}>
             {children}

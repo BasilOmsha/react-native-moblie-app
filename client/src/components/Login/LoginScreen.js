@@ -16,7 +16,7 @@ const LoginScreen = ({ navigation }) => {
                 activeOpacity={0.5}
                 onPress={() => {
                     // change to login screeb
-                    navigation.navigate('Registration');
+                    navigation.navigate('Registration | Basic Info');
                 }} >
                 <Text style={styles.buttonTextStyle}>Register</Text>
             </TouchableOpacity >

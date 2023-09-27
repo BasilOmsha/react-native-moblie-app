@@ -11,9 +11,12 @@ export const useSignupFormContext = () => {
 
 export const Labels = ({ children }) => {
     const [isFocusFname, setIsFocusFname] = useState(false);
+    const [isFocusFnameError, setIsFocusFnameError] = useState(false);
     const [isFocusLname, setIsFocusLname] = useState(false);
+    const [isFocusLnameError, setIsFocusLnameError] = useState(false);
     const [isFocusEmail, setIsFocusEmail] = useState(false);
     const [isFocusPaswd, setIsFocusPaswd] = useState(false);
+    const [isFocusConfPaswd, setIsFocusConfPaswd] = useState(false);
     const [isFocusDay, setIsFocusDay] = useState(false);
     const [isFocusMonth, setIsFocusMonth] = useState(false);
     const [isFocusYear, setIsFocusYear] = useState(false);
@@ -30,6 +33,13 @@ export const Labels = ({ children }) => {
                 </Text>
             );
         }
+        if (isFocusFnameError) {
+            return (
+                <Text style={[styles.label, isFocusFnameError && { color: 'red' }]}>
+                    First name should be at least two characters!
+                </Text>
+            );
+        }
         return null;
     }
     const renderLablLName = () => {
@@ -37,6 +47,13 @@ export const Labels = ({ children }) => {
             return (
                 <Text style={[styles.label, isFocusLname && { color: 'blue' }]}>
                     Last Name
+                </Text>
+            );
+        }
+        if (isFocusLnameError) {
+            return (
+                <Text style={[styles.label, isFocusLnameError && { color: 'red' }]}>
+                    Last name should be at least two characters!
                 </Text>
             );
         }
@@ -59,6 +76,17 @@ export const Labels = ({ children }) => {
             return (
                 <Text style={[styles.label, isFocusPaswd && { color: 'blue' }]}>
                     Password
+                </Text>
+            );
+        }
+        return null;
+    }
+
+    const renderLablConfPaswd = () => {
+        if (isFocusConfPaswd) {
+            return (
+                <Text style={[styles.label, isFocusConfPaswd && { color: 'blue' }]}>
+                    Confirm Password
                 </Text>
             );
         }
@@ -110,12 +138,18 @@ export const Labels = ({ children }) => {
         <SignupFormContext.Provider value={{
             isFocusFname,
             setIsFocusFname,
+            isFocusFnameError,
+            setIsFocusFnameError,
             isFocusLname,
             setIsFocusLname,
+            isFocusLnameError,
+            setIsFocusLnameError,
             isFocusEmail,
             setIsFocusEmail,
             isFocusPaswd,
             setIsFocusPaswd,
+            isFocusConfPaswd,
+            setIsFocusConfPaswd,
             isFocusDay,
             setIsFocusDay,
             isFocusMonth,
@@ -134,6 +168,7 @@ export const Labels = ({ children }) => {
             renderLablLName,
             renderLablEmail,
             renderLablPaswd,
+            renderLablConfPaswd,
             renderLablDay,
             renderLablMonth,
             renderLablYear,
