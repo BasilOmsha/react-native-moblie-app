@@ -62,7 +62,7 @@ const ThirdRegistration = ({ navigation }) => {
             }
             catch (error) {
                 console.log("The error: " + error);
-                slabelContext.etLoading(false);
+                labelContext.setLoading(false);
             }
             finally {
                 clearForm();
