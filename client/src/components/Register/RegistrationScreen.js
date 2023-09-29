@@ -22,9 +22,7 @@ const RegistrationScreen = ({ navigation }) => {
         userContext.lastnameInputHandler('');
 
         labelContext.setIsFocusFname(false);
-        labelContext.setIsFocusFnameError(false);
         labelContext.setIsFocusLname(false);
-        labelContext.setIsFocusLnameError(false);
 
         labelContext.setErrortext('');
     }
