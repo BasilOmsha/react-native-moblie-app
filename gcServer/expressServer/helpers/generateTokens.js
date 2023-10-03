@@ -7,7 +7,7 @@ const PRIV_KEY = fs.readFileSync(pathToKey, 'utf8');
 const refreshToken = user => {
     const email = user.email;
 
-    const limit = 20 * 1 // 3600 seconds or 1h
+    const limit = 60 * 60 // 3600 seconds or 1h
     const expiresIn = Math.floor(Date.now() / 1000) + limit 
 
     const payload = {
