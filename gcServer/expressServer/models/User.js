@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    refreshToken: {
+        type: String
+    },
     bookedFlights: [
         {
             type: mongoose.Schema.Types.ObjectId,

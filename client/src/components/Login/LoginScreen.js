@@ -1,19 +1,31 @@
-import React, { useState } from 'react';
-import {
-    StyleSheet, TextInput, View, Text, Image, KeyboardAvoidingView, Keyboard, TouchableOpacity, ScrollView,
-} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, TextInput, View, Text, Image, KeyboardAvoidingView, Keyboard, TouchableOpacity, ScrollView, } from 'react-native';
 import { useUserContext } from '../../services/UserContext';
+import { useAuthContext } from '../../services/loginServices/AuthContext';
+import EncryptedStorage from 'react-native-encrypted-storage';
 import { useSignupFormContext } from '../../services/signupServices/SignupLabelsContext';
+import LoginService from '../../services/loginServices/LoginService';
+import isAuthenticated from '../../services/loginServices/IsAuthenticated';
 import Loader from '../../services/Loader';
 import styles from '../../styles/LoginStyle';
 
 const LoginScreen = ({ navigation }) => {
     const userContext = useUserContext();
-
+    const authContext = useAuthContext();
     const labelContext = useSignupFormContext();
+
+    const handleLogin = async () => {
+        await LoginService(userContext, authContext, labelContext);
+    };
+
+    useEffect(() => {
+        isAuthenticated(authContext, labelContext);
+    }, []);
+
     return (
         <View style={styles.mainLoginContainer}>
-            <Loader loading={labelContext.loading} />
+            {labelContext.loading == true ?
+                <Loader loading={userContext.loading} /> : labelContext.loading == false}
             <ScrollView keyboardShouldPersistTaps="handled">
                 <View style={{ alignItems: 'center' }}>
                     <Image
@@ -26,6 +38,7 @@ const LoginScreen = ({ navigation }) => {
                         }}
                     />
                 </View>
+                {labelContext.errortext ? <Text style={{ color: 'red', fontSize: 15, textAlign: 'left', marginLeft: 40, marginLeft: 40, marginBottom: -10, marginTop: 10 }}>{labelContext.errortext}</Text> : null}
                 <View style={styles.SectionStyle}>
                     {labelContext.renderLablEmail()}
                     <TextInput
@@ -50,6 +63,7 @@ const LoginScreen = ({ navigation }) => {
                     <TextInput
                         style={[styles.inputStyle, labelContext.isFocusPaswd && { borderColor: 'blue' }]}
                         underlineColorAndroid="#f000"
+                        secureTextEntry={true}
                         placeholder={!labelContext.isFocusPaswd ? 'Password' : 'Password'}
                         placeholderTextColor="#777777"
                         onFocus={async () => {
@@ -67,9 +81,9 @@ const LoginScreen = ({ navigation }) => {
                 < TouchableOpacity
                     style={styles.loginButton}
                     activeOpacity={0.5}
-                    onPress={() => {
-                        // navigation.navigate('Registration | Basic Info');
-                    }} >
+                    onPress={handleLogin}
+                    // onPress={()=>LoginService(userContext, authContext, labelContext)}
+                >
                     <Text style={styles.loginbuttonTextStyle}>Login</Text>
                 </TouchableOpacity >
                 <View style={styles.signupLinkContainer}>

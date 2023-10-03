@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const UserContext = createContext();
 
@@ -7,10 +8,10 @@ export const useUserContext = () => {
 };
 
 export const User = ({ children }) => {
-    const [firstname, setFirstname] = useState();
-    const [lastname, setLastname] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [paswdConfirm, setConfirmPaswd] = useState();
     const [day, setDay] = useState();
     const [month, setMonth] = useState();
@@ -45,8 +46,8 @@ export const User = ({ children }) => {
         setGender(enteredText);
     };
 
-    const userObject = { 
-        "firstname": firstname, 
+    const userObject = {
+        "firstname": firstname,
         "lastname": lastname,
         "email": email,
         "password": password,
@@ -57,11 +58,30 @@ export const User = ({ children }) => {
         "gender": gender
     }
 
+    const resObject = {
+        "__v": 0,
+        "_id": "",
+        "firstname": firstname,
+        "lastname": lastname,
+        "email": email,
+        "password": password,
+        "dob": "",
+        "gender": gender,
+        "bookedFlights": [],
+        "refreshToken": ""
+    }
+
+    const loginObject = {
+        "email": email,
+        "password": password
+    }
+
+
     return (
         <UserContext.Provider value={{
-           firstname, firstnameInputHandler, lastname, lastnameInputHandler, email, emailInputHandler,
-           password, passwordInputHandler, paswdConfirm, confirmPaswdInputHandler, day, setDay, dayInputHandler, month, setMonth, monthInputHandler, year, setYear, yearInputHandler, 
-           gender, setGender, genderInputHandler, userObject
+            firstname, firstnameInputHandler, lastname, lastnameInputHandler, email, emailInputHandler,
+            password, passwordInputHandler, paswdConfirm, confirmPaswdInputHandler, day, setDay, dayInputHandler, month, setMonth, monthInputHandler, year, setYear, yearInputHandler,
+            gender, setGender, genderInputHandler, resObject, loginObject, userObject
         }}>
             {children}
         </UserContext.Provider>

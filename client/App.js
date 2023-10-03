@@ -1,12 +1,20 @@
 import React from 'react';
 // import { View, Text, Button, StyleSheet, Image, FlatList, TouchableOpacity, TextInput } from 'react-native';
-import SignupNav from './src/services/signupServices/SignupNav';
-import styles from './src/styles/SignupStyle';
+import AppNav from './src/components/Navigation/AppNav';
+import { User } from './src/services/UserContext';
+import { Labels } from './src/services/signupServices/SignupLabelsContext';
+import { Auth } from './src/services/loginServices/AuthContext';
 
 const App = () => {
 
   return (
-    <SignupNav />
+    <User>
+      <Labels>
+        <Auth>
+          <AppNav />
+        </Auth>
+      </Labels>
+    </User>
   );
 };
 export default App;
