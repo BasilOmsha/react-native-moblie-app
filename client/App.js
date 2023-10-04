@@ -1,4 +1,8 @@
-import NavButton from './components/navigationButton/NavButton';
+import NavButton from './components/navigation/mainAppNav';
 
-const App = () => <NavButton />;
+const App = () => (
+  <>
+    <NavButton />
+  </>
+);
 export default App;
