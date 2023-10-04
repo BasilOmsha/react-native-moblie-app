@@ -25,7 +25,7 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View style={styles.mainLoginContainer}>
             {labelContext.loading == true ?
-                <Loader loading={userContext.loading} /> : labelContext.loading == false}
+                <Loader loading={labelContext.loading} /> : labelContext.loading == false}
             <ScrollView keyboardShouldPersistTaps="handled">
                 <View style={{ alignItems: 'center' }}>
                     <Image
