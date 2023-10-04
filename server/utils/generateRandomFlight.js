@@ -3,13 +3,14 @@ const { europeanCountriesWithAirports, airlines } = require("../data");
 
 function generateRandomFlight(from, to, startDate, fromCountry, toCountry) {
   const flights = []; // Create an array to store flight objects
-  const numberOfFlights = 3; // Number of flights for the same date
+  const numberOfFlights = 10; // Number of flights for the same date
 
   for (let i = 0; i < numberOfFlights; i++) {
     const isDirectFlight = Math.random() < 0.5;
     const durationHours = isDirectFlight
       ? 4
       : Math.floor(Math.random() * 10) + 1;
+
     const durationMinutes = isDirectFlight ? 0 : Math.floor(Math.random() * 60);
 
     // Generate a random departure time within the specified date
