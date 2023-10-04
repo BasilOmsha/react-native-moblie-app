@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URI = '192.168.0.13:8080';
+const API_BASE_URI = '192.168.0.13:3001';
 
 export const fetchLocations = async (
   from,
