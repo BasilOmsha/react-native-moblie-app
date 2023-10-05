@@ -42,7 +42,7 @@ const CustomDrawer = props => {
               fontFamily: 'Roboto-Medium',
               marginBottom: 5,
             }}>
-            {userContext.email}
+            {userContext.firstname} {userContext.lastname}
           </Text>
         </ImageBackground>
       <DrawerContentScrollView {...props}>
