@@ -14,12 +14,12 @@ const verifyCallback = async (req, res, next) => {
         if (verify) {
             const refreshTokenObj = refreshToken(user);
             res.status(200).json({ success: true, user: user.email, token: refreshTokenObj.token, expiresIn: refreshTokenObj.expires });
-    } else {
-        res.status(401).json({ success: false, msg: "Incorrect email or password!" });
+        } else {
+            res.status(401).json({ success: false, msg: "Incorrect email or password!" });
+        }
+    } catch (error) {
+        return (error)
     }
-} catch (error) {
-    return (error)
-}
 }
 
 module.exports = { verifyCallback };

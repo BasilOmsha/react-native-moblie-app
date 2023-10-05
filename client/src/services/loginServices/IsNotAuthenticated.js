@@ -7,9 +7,10 @@ const IsNotAuthenticated = async (labelContext, authContext) => {
     userInfo = JSON.parse(userInfo);
     userToken = JSON.parse(userToken);
     if (userToken) {
-        const token = userToken.token;
-        const info = userInfo.user;
+        const token = userToken.token.toString();
+        const info = userInfo.user.toString();
         console.log("token: " + token);
+        console.log("info: " + info);
         try {
             // let response = await fetch("http://10.0.2.2:3000/rest/services/protected", {
             let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/protected", {
@@ -24,15 +25,16 @@ const IsNotAuthenticated = async (labelContext, authContext) => {
 
             if (data.success === false || response.status === 401) {
                 console.log(response.status);
-                // await EncryptedStorage.removeItem('userToken');
-                // await EncryptedStorage.removeItem('userInfo');
+                await EncryptedStorage.removeItem('userToken');
+                await EncryptedStorage.removeItem('userInfo');
                 labelContext.setLoading(true);
                 authContext.setUserToken(null);
                 authContext.setUserInfo(null);
 
             } else {
+                console.log("test2");
                 authContext.setUserToken(token);
-                authContext.setUserInfo(userInfo);
+                authContext.setUserInfo(info);
             }
         } catch (err) {
             console.log('Error in IsNotAuthenticated:' + err);

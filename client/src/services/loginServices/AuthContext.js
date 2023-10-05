@@ -12,7 +12,6 @@ export const Auth = ({ children }) => {
     const [userToken, setUserToken] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
 
-
     const logout = async () => {
         setUserToken(null);
         setUserInfo(null);

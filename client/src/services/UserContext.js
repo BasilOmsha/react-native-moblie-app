@@ -76,7 +76,6 @@ export const User = ({ children }) => {
         "password": password
     }
 
-
     return (
         <UserContext.Provider value={{
             firstname, firstnameInputHandler, lastname, lastnameInputHandler, email, emailInputHandler,

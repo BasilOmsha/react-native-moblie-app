@@ -5,14 +5,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import { useUserContext } from '../../services/UserContext';
 import { useAuthContext } from '../../services/loginServices/AuthContext';
 import AuthStack from './AuthStack';
-import AppStack from './AppStack';
+import ProfileStack from './ProfileStack';
 
 const AppNav = () => {
     const authContext = useAuthContext();
 
     return (
         <NavigationContainer>
-            {authContext.userToken !== null ? <AppStack /> : <AuthStack />}
+            {authContext.userToken !== null ? <ProfileStack /> : <AuthStack />}
         </NavigationContainer>
     );
 };

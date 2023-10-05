@@ -11,8 +11,6 @@ const LoginService = async (userContext, authContext, labelContext) => {
     labelContext.setLoading(true);
     await EncryptedStorage.removeItem('userToken');
     await EncryptedStorage.removeItem('userInfo');
-    await EncryptedStorage.removeItem('username');
-
     try {
         // let response = await fetch("http://10.0.2.2:3000/rest/services/login", {
         let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/login", {

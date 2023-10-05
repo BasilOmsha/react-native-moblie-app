@@ -9,8 +9,8 @@ const isAuthenticated = async (authContext, labelContext) => {
     userToken = JSON.parse(userToken);
     if (userToken) {
         const token = userToken.token.toString();
-        const info = userInfo.user;
-        console.log("token: " + token);
+        const info = userInfo.user.toString();
+        // console.log("token: " + token);
         try {
             // let response = await fetch("http://10.0.2.2:3000/rest/services/protected", {
             let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/protected", {
@@ -24,18 +24,24 @@ const isAuthenticated = async (authContext, labelContext) => {
             console.log("data: ", data); // Log the parsed data
 
             if (data.success === true || response.status === 201) {
-                console.log("test2");
+                console.log("test1");
                 authContext.setUserToken(token);
-                authContext.setUserInfo(userInfo);
+                await EncryptedStorage.setItem('userToken', JSON.stringify({
+                    token: token,
+                }));
+                authContext.setUserInfo(info);
+                await EncryptedStorage.setItem('userInfo', JSON.stringify({
+                    user: info,
+                }));
             } else {
-                // await EncryptedStorage.removeItem('userToken');
-                // await EncryptedStorage.removeItem('userInfo');
+                await EncryptedStorage.removeItem('userToken');
+                await EncryptedStorage.removeItem('userInfo');
                 authContext.setUserToken(null);
                 authContext.setUserInfo(null);
             }
         } catch (err) {
-            // await EncryptedStorage.removeItem('userToken');
-            // await EncryptedStorage.removeItem('userInfo');
+            await EncryptedStorage.removeItem('userToken');
+            await EncryptedStorage.removeItem('userInfo');
             console.log('No token or token invalidated : ' + err);
             authContext.setUserToken(null);
             authContext.setUserInfo(null);

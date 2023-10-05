@@ -9,8 +9,12 @@ import FlightSVG from '../../assets/images/flight.svg'
 const WelcomeScreen = ({ navigation }) => {
     const authContext = useAuthContext();
     const labelContext = useSignupFormContext();
+
+    async function triggerFunctions() {
+        await isAuthenticated(authContext, labelContext);
+    }
     useEffect(() => {
-        isAuthenticated(authContext, labelContext);
+        triggerFunctions();
     }, []);
 
     return (
@@ -37,7 +41,7 @@ const WelcomeScreen = ({ navigation }) => {
                     width={700}
                     height={700}
                     marginTop={100}
-                    // style={{ transform: [{ rotate: '15deg' }] }}
+                // style={{ transform: [{ rotate: '15deg' }] }}
                 />
                 {/* <Image
                     source={require('../../assets/images/airplain.png')}
