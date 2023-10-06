@@ -8,6 +8,7 @@ export const useUserContext = () => {
 };
 
 export const User = ({ children }) => {
+    const [_id, set_id] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
@@ -58,6 +59,17 @@ export const User = ({ children }) => {
         "gender": gender
     }
 
+    const userUpdateObj = {
+        "_id": _id,
+        "firstname": firstname,
+        "lastname": lastname,
+        "email": email,
+        "day": day,
+        "month": month,
+        "year": year,
+        "gender": gender
+    }
+
     const resObject = {
         "__v": 0,
         "_id": "",
@@ -76,11 +88,15 @@ export const User = ({ children }) => {
         "password": password
     }
 
+    const emailObject = {
+        "email": email
+    }
+
     return (
         <UserContext.Provider value={{
             firstname, firstnameInputHandler, setFirstname, lastname, lastnameInputHandler, setLastname, email, setEmail, emailInputHandler,
             password, setPassword, passwordInputHandler, paswdConfirm, confirmPaswdInputHandler, day, setDay, dayInputHandler, month, setMonth, monthInputHandler, year, setYear, yearInputHandler,
-            gender, setGender, genderInputHandler, resObject, loginObject, userObject
+            gender, setGender, genderInputHandler, resObject, loginObject, userObject, emailObject, userUpdateObj, _id, set_id
         }}>
             {children}
         </UserContext.Provider>

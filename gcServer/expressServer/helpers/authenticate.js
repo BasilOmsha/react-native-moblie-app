@@ -13,7 +13,7 @@ const verifyCallback = async (req, res, next) => {
         console.log("Passwords match: " + verify);
         if (verify) {
             const refreshTokenObj = refreshToken(user);
-            res.status(200).json({ success: true, user: user.email, token: refreshTokenObj.token, expiresIn: refreshTokenObj.expires });
+            res.status(200).json({ success: true, user: user._id, token: refreshTokenObj.token, expiresIn: refreshTokenObj.expires });
         } else {
             res.status(401).json({ success: false, msg: "Incorrect email or password!" });
         }

@@ -10,7 +10,9 @@ import IsNotAuthenticated from '../../services/loginServices/IsNotAuthenticated'
 import styles from '../../styles/ProfileStyle';
 import Loader from '../../services/Loader';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import GetUserDataByEmail from '../../services/profileServices/GetUserData';
+import GetUserData from '../../services/profileServices/GetUserData';
+import UpdateUserInfo from '../../services/profileServices/UpdateUser';
+import { UpdateValid } from '../../services/profileServices/UserUptValid';
 
 const ProfileScreen = () => {
     const userContext = useUserContext();
@@ -18,8 +20,11 @@ const ProfileScreen = () => {
     const authContext = useAuthContext();
     const [refreshing, setRefreshing] = useState(false);
 
-    const onRefresh = useCallback(() => {
+    const onRefresh = useCallback(async () => {
         setRefreshing(true);
+        labelContext.setErrortext(null);
+        triggerFunctions();
+        // UpdateValid(userContext.userObject, labelContext.setErrortext);
         setTimeout(() => {
             setRefreshing(false);
         }, 2000);
@@ -27,7 +32,14 @@ const ProfileScreen = () => {
 
     async function triggerFunctions() {
         await IsNotAuthenticated(labelContext, authContext);
-        await GetUserDataByEmail(authContext, userContext, labelContext);
+        await GetUserData(authContext, userContext, labelContext);
+    }
+
+    const updateUser = async () => {
+        const validationStatus = await UpdateValid(userContext.userUpdateObj, labelContext.setErrortext);
+        if (validationStatus === false) {
+            await UpdateUserInfo(userContext, labelContext);
+        }
     }
 
     useEffect(() => {
@@ -43,9 +55,10 @@ const ProfileScreen = () => {
     return (
         <SafeAreaView style={styles.MainContainerStyle}>
             {labelContext.loading == true ? <Loader loading={userContext.loading} /> : labelContext.loading == false}
-            <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.ScrollView}refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} progressBackgroundColor={'#27aae2'}/>}>
+            <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.ScrollView} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} progressBackgroundColor={'#27aae2'} />}>
                 <View style={styles.SectionStyle}>
-                    <Text style={styles.HeaderTextStyle}>NAME</Text>
+                    <Text style={styles.HeaderTextStyle}>NAME {labelContext.errortext == 'The last name is too short' || labelContext.errortext == 'The first name is too short' ? <Text style={{ color: 'red', fontSize: 12, textAlign: 'left', marginLeft:40, marginLeft:40, marginBottom:-10, marginTop:10 }}>{labelContext.errortext}</Text> : null}</Text>
+
                     <View style={styles.InputContainerStyle}>
                         {labelContext.renderLablFName()}
                         <TextInput
@@ -53,11 +66,11 @@ const ProfileScreen = () => {
                             underlineColorAndroid="#f000"
                             placeholder={!labelContext.isFocusFname ? 'First Name' : 'First Name'}
                             placeholderTextColor="#777777"
-                            onFocus={async () => {
+                            onFocus={() => {
                                 labelContext.setIsFocusFname(true)
                             }}
-                            onBlur={async () => { labelContext.setIsFocusFname(false) }}
-                            onChange={async (item) => {
+                            onBlur={() => { labelContext.setIsFocusFname(false) }}
+                            onChange={(item) => {
                                 // setValue(item.value);
                                 labelContext.setIsFocusFname(true);
                             }}
@@ -73,9 +86,9 @@ const ProfileScreen = () => {
                             underlineColorAndroid="#f000"
                             placeholder={!labelContext.isFocusFname ? 'Last Name' : 'Last Name'}
                             placeholderTextColor="#777777"
-                            onFocus={async () => labelContext.setIsFocusLname(true)}
-                            onBlur={async () => labelContext.setIsFocusLname(false)}
-                            onChange={async (item) => {
+                            onFocus={() => labelContext.setIsFocusLname(true)}
+                            onBlur={() => labelContext.setIsFocusLname(false)}
+                            onChange={(item) => {
                                 // setValue(item.value);
                                 labelContext.setIsFocusLname(true);
                             }}
@@ -85,7 +98,7 @@ const ProfileScreen = () => {
                     </View>
                 </View>
                 <View style={styles.SectionStyle}>
-                    <Text style={styles.HeaderTextStyle}>EMAIL ADDRESS</Text>
+                    <Text style={styles.HeaderTextStyle}>EMAIL ADDRESS {labelContext.errortext == 'Email is already in use!' || labelContext.errortext == 'Invalid email format' ? <Text style={{ color: 'red', fontSize: 12, textAlign: 'left', marginLeft:40, marginBottom:-10, marginTop:10 }}>{labelContext.errortext}</Text> : null}</Text>
                     <View style={styles.InputContainerStyle}>
                         {labelContext.renderLablEmail()}
                         <TextInput
@@ -101,7 +114,7 @@ const ProfileScreen = () => {
                     </View>
                 </View>
                 <View style={styles.SectionStyle}>
-                    <Text style={styles.HeaderTextStyle}>DATE OF BIRTH</Text>
+                    <Text style={styles.HeaderTextStyle}>DATE OF BIRTH {labelContext.errortext == 'day is empty' || labelContext.errortext == 'month is empty'  || labelContext.errortext == 'year is empty' || labelContext.errortext == 'You must be 13 or older!'? <Text style={{ color: 'red', fontSize: 12, textAlign: 'left', marginLeft:40, marginBottom:-10, marginTop:10 }}>{labelContext.errortext}</Text> : null}</Text>
                     <Text style={styles.HeaderTextStyle}>DAY</Text>
                     <View style={styles.InputContainerStyle}>
                         {labelContext.renderLablDay()}
@@ -215,8 +228,7 @@ const ProfileScreen = () => {
                     </View>
                 </View>
                 <TouchableOpacity style={styles.saveButton}
-                // onPress={() => navigation.navigate('Login')}
-                >
+                    onPress={updateUser}>
                     <Text style={styles.saveButtonText}>
                         SAVE
                     </Text>

@@ -7,27 +7,22 @@ const updateError = (error, updateState) => {
     //     updateState('');
     // }, 5000)
 }
-const GetUserData = async (authContext, userContext, labelContext) => {
+const UpdateUserInfo = async (userContext, labelContext) => {
     labelContext.setLoading(true);
-    let userInfo = await EncryptedStorage.getItem('userInfo');
-    userInfo = JSON.parse(userInfo);
-    let info = "";
-    if (userInfo) {
-        info = userInfo.user.toString();
-        console.log("info123: " + info);
-    }
-    const idObj = { "_id": info };
+    console.log(userContext.firstname);
+    console.log(userContext.lastname);
+    console.log(userContext.email);
     try {
-        let response = await fetch("http://10.0.2.2:3000/rest/services/getUserData", {
+        let response = await fetch("http://10.0.2.2:3000/rest/services/updateUserData", {
         // let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/getUserData", {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(idObj)
+            body: JSON.stringify(userContext.userUpdateObj)
         });
         if (!response.ok) {
-            console.log("somthing")
+            console.log("somthing2");
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
@@ -38,7 +33,7 @@ const GetUserData = async (authContext, userContext, labelContext) => {
             updateError(json.msg, labelContext.setErrortext);
             labelContext.setLoading(false);
         } else {
-            userContext.set_id(json.user._id);
+            // userContext.set_id(json.user._id);
             userContext.setFirstname(json.user.firstname);
             userContext.setLastname(json.user.lastname);
             userContext.setEmail(json.user.email);
@@ -47,14 +42,14 @@ const GetUserData = async (authContext, userContext, labelContext) => {
             userContext.setMonth(dobParts[1]);
             userContext.setYear(dobParts[2]);
             userContext.setGender(json.user.gender);
-            console.log("Getting the data of: " + json.user._id);
+
         }
     } catch (error) {
-        console.log("The error: " + error);
+        console.log("Update error: " + error);
         labelContext.setLoading(false);
     } finally {
         labelContext.setLoading(false);
     }
 };
 
-export default GetUserData;
+export default UpdateUserInfo;
