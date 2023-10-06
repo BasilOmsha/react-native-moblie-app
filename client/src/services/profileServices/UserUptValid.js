@@ -9,7 +9,7 @@ const UpdateValid = async (userUpdateObj, setErrortext) => {
     const { _id, firstname, lastname, email, day, month, year } = userUpdateObj;
     try {
         //  let response = await fetch("http://10.0.2.2:3000/rest/services/updateValidation",
-         let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/clientValidation",
+         let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/updateValidation",
             {
                 method: 'POST',
                 headers: {
