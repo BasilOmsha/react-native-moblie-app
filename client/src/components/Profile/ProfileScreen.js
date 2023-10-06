@@ -39,10 +39,8 @@ const ProfileScreen = () => {
         const validationStatus = await UpdateValid(userContext.userUpdateObj, labelContext.setErrortext);
         if (validationStatus === false) {
             await UpdateUserInfo(userContext, labelContext);
-        }
-        setTimeout(() => {
             onRefresh();
-        }, 2000);
+        }
     }
 
     useEffect(() => {
@@ -60,7 +58,7 @@ const ProfileScreen = () => {
             {labelContext.loading == true ? <Loader loading={userContext.loading} /> : labelContext.loading == false}
             <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={styles.ScrollView} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} progressBackgroundColor={'#27aae2'} />}>
                 <View style={styles.SectionStyle}>
-                    <Text style={styles.HeaderTextStyle}>NAME {labelContext.errortext == 'The last name is too short' || labelContext.errortext == 'The first name is too short' ? <Text style={{ color: 'red', fontSize: 12, textAlign: 'left', marginLeft:40, marginLeft:40, marginBottom:-10, marginTop:10 }}>{labelContext.errortext}</Text> : null}</Text>
+                    <Text style={styles.HeaderTextStyle}>NAME {labelContext.errortext == 'The last name is too short' || labelContext.errortext == 'The first name is too short' ? <Text style={{ color: 'red', fontSize: 12, textAlign: 'left', marginLeft: 40, marginLeft: 40, marginBottom: -10, marginTop: 10 }}>{labelContext.errortext}</Text> : null}</Text>
 
                     <View style={styles.InputContainerStyle}>
                         {labelContext.renderLablFName()}
@@ -101,7 +99,7 @@ const ProfileScreen = () => {
                     </View>
                 </View>
                 <View style={styles.SectionStyle}>
-                    <Text style={styles.HeaderTextStyle}>EMAIL ADDRESS {labelContext.errortext == 'Email is already in use!' || labelContext.errortext == 'Invalid email format' ? <Text style={{ color: 'red', fontSize: 12, textAlign: 'left', marginLeft:40, marginBottom:-10, marginTop:10 }}>{labelContext.errortext}</Text> : null}</Text>
+                    <Text style={styles.HeaderTextStyle}>EMAIL ADDRESS {labelContext.errortext == 'Email is already in use!' || labelContext.errortext == 'Invalid email format' ? <Text style={{ color: 'red', fontSize: 12, textAlign: 'left', marginLeft: 40, marginBottom: -10, marginTop: 10 }}>{labelContext.errortext}</Text> : null}</Text>
                     <View style={styles.InputContainerStyle}>
                         {labelContext.renderLablEmail()}
                         <TextInput
@@ -117,7 +115,7 @@ const ProfileScreen = () => {
                     </View>
                 </View>
                 <View style={styles.SectionStyle}>
-                    <Text style={styles.HeaderTextStyle}>DATE OF BIRTH {labelContext.errortext == 'day is empty' || labelContext.errortext == 'month is empty'  || labelContext.errortext == 'year is empty' || labelContext.errortext == 'You must be 13 or older!'? <Text style={{ color: 'red', fontSize: 12, textAlign: 'left', marginLeft:40, marginBottom:-10, marginTop:10 }}>{labelContext.errortext}</Text> : null}</Text>
+                    <Text style={styles.HeaderTextStyle}>DATE OF BIRTH {labelContext.errortext == 'day is empty' || labelContext.errortext == 'month is empty' || labelContext.errortext == 'year is empty' || labelContext.errortext == 'You must be 13 or older!' ? <Text style={{ color: 'red', fontSize: 12, textAlign: 'left', marginLeft: 40, marginBottom: -10, marginTop: 10 }}>{labelContext.errortext}</Text> : null}</Text>
                     <Text style={styles.HeaderTextStyle}>DAY</Text>
                     <View style={styles.InputContainerStyle}>
                         {labelContext.renderLablDay()}
