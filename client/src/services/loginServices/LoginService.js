@@ -12,8 +12,8 @@ const LoginService = async (userContext, authContext, labelContext) => {
     await EncryptedStorage.removeItem('userToken');
     await EncryptedStorage.removeItem('userInfo');
     try {
-        let response = await fetch("http://10.0.2.2:3000/rest/services/login", {
-        // let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/login", {
+        // let response = await fetch("http://10.0.2.2:3000/rest/services/login", {
+        let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
