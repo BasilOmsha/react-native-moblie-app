@@ -27,7 +27,7 @@ const ProfileScreen = () => {
         // UpdateValid(userContext.userObject, labelContext.setErrortext);
         setTimeout(() => {
             setRefreshing(false);
-        }, 2000);
+        },500);
     }, []);
 
     async function triggerFunctions() {
