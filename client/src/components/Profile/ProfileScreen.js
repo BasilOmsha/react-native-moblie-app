@@ -40,6 +40,9 @@ const ProfileScreen = () => {
         if (validationStatus === false) {
             await UpdateUserInfo(userContext, labelContext);
         }
+        setTimeout(() => {
+            onRefresh();
+        }, 2000);
     }
 
     useEffect(() => {
