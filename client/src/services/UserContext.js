@@ -78,8 +78,8 @@ export const User = ({ children }) => {
 
     return (
         <UserContext.Provider value={{
-            firstname, firstnameInputHandler, lastname, lastnameInputHandler, email, emailInputHandler,
-            password, passwordInputHandler, paswdConfirm, confirmPaswdInputHandler, day, setDay, dayInputHandler, month, setMonth, monthInputHandler, year, setYear, yearInputHandler,
+            firstname, firstnameInputHandler, setFirstname, lastname, lastnameInputHandler, setLastname, email, setEmail, emailInputHandler,
+            password, setPassword, passwordInputHandler, paswdConfirm, confirmPaswdInputHandler, day, setDay, dayInputHandler, month, setMonth, monthInputHandler, year, setYear, yearInputHandler,
             gender, setGender, genderInputHandler, resObject, loginObject, userObject
         }}>
             {children}

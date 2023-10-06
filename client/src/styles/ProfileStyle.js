@@ -10,7 +10,7 @@ const profileStyle = StyleSheet.create({
     ScrollView: {
         // height: '100%',
         width: '100%',
-        backgroundColor: '#ccced5',
+        backgroundColor: '#f5f5f5',
         flexGrow: 1
     },
     SectionStyle: {
@@ -68,7 +68,7 @@ const profileStyle = StyleSheet.create({
         fontSize: 15,
         textAlign: 'center',
         fontFamily: 'Inter-Bold',
-        marginRight: 330
+        marginRight: 312
     },
 
 });

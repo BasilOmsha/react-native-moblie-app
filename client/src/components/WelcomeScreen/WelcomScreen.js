@@ -26,7 +26,7 @@ const WelcomeScreen = ({ navigation }) => {
                 backgroundColor: '#fff',
             }}>
             {/* <ScrollView > */}
-            <View style={{ marginTop: -1, marginBottom: -40, width: '100%', alignItems: 'center', backgroundColor: '#cfebf3' }}>
+            <View style={{ marginTop: -1, marginBottom: 10, width: '100%', height:'10%', alignItems: 'center', backgroundColor: '#cfebf3' }}>
                 <Text
                     style={{
                         fontFamily: 'Inter-Bold',
@@ -40,7 +40,7 @@ const WelcomeScreen = ({ navigation }) => {
                 <FlightSVG
                     width={700}
                     height={700}
-                    marginTop={100}
+                    marginTop={90}
                 // style={{ transform: [{ rotate: '15deg' }] }}
                 />
                 {/* <Image
@@ -58,7 +58,8 @@ const WelcomeScreen = ({ navigation }) => {
                     padding: 20,
                     width: '90%',
                     borderRadius: 10,
-                    marginBottom: 50,
+                    marginTop: 30,
+                    marginBottom: 20,
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                 }}

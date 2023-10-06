@@ -23,7 +23,15 @@ const CustomDrawer = props => {
 
     const handleLogout = () => {
         labelContext.setLoading(true);
-        authContext.logout();
+        userContext.setFirstname('');
+        userContext.setLastname('');
+        userContext.setEmail('');
+        userContext.setPassword('');
+        userContext.setDay('');
+        userContext.setMonth('');
+        userContext.setYear('');
+        userContext.setGender('');
+        authContext.logout(userContext);
     }
 
   return (
