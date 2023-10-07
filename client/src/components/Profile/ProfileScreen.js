@@ -14,7 +14,7 @@ import GetUserData from '../../services/profileServices/GetUserData';
 import UpdateUserInfo from '../../services/profileServices/UpdateUser';
 import { UpdateValid } from '../../services/profileServices/UserUptValid';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
     const userContext = useUserContext();
     const labelContext = useSignupFormContext();
     const authContext = useAuthContext();
@@ -233,7 +233,17 @@ const ProfileScreen = () => {
                     <Text style={styles.saveButtonText}>
                         SAVE
                     </Text>
-                    <MaterialIcons name="arrow-forward" size={15} color="#757575" />
+                    <MaterialIcons name="arrow-forward" size={15} color="#000" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.ChangePaswdButton}
+                    onPress={() => {
+                        navigation.navigate('ChangePassword', {screen: 'Change password'});
+                    }}
+                    >
+                    <Text style={styles.ChangePaswdButtonText}>
+                        CHANGE PASSWORD
+                    </Text>
+                    <MaterialIcons name="arrow-forward" size={15} color="#000" />
                 </TouchableOpacity>
             </ScrollView >
         </SafeAreaView  >

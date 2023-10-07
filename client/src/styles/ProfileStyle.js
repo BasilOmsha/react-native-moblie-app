@@ -48,6 +48,7 @@ const profileStyle = StyleSheet.create({
     },
     selectedTextStyle: {
         fontSize: 16,
+        color: '#000'
     },
     iconStyle: {
         width: 20,
@@ -60,15 +61,26 @@ const profileStyle = StyleSheet.create({
     saveButton: {
         backgroundColor: '#fff',
         padding: 20,
-        marginBottom: 50,
+        marginBottom: 5,
         flexDirection: 'row',
     },
     saveButtonText: {
-        color: '#757575',
+        color: '#000',
         fontSize: 15,
-        textAlign: 'center',
         fontFamily: 'Inter-Bold',
-        marginRight: 312
+        width: '100%',
+    },
+    ChangePaswdButton: {
+        backgroundColor: '#fff',
+        padding: 20,
+        marginBottom: 50,
+        flexDirection: 'row',
+    },
+    ChangePaswdButtonText: {
+        color: '#000',
+        fontSize: 15,
+        width: '100%',
+        fontFamily: 'Inter-Bold',
     },
 
 });
