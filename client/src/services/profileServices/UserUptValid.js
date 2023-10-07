@@ -53,8 +53,8 @@ const UpdateValid = async (userUpdateObj, setErrortext) => {
 const PswdValid = async (newPswdObj, setErrortext) => {
     const { newPaswd, paswdConfirm } = newPswdObj;
     try {
-         let response = await fetch("http://10.0.2.2:3000/rest/services/pswdValidation",
-        //  let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/updateValidation",
+        //  let response = await fetch("http://10.0.2.2:3000/rest/services/pswdValidation",
+         let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/pswdValidation",
             {
                 method: 'POST',
                 headers: {

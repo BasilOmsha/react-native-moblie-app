@@ -24,7 +24,6 @@ const ProfileScreen = ({ navigation }) => {
         setRefreshing(true);
         labelContext.setErrortext(null);
         triggerFunctions();
-        // UpdateValid(userContext.userObject, labelContext.setErrortext);
         setTimeout(() => {
             setRefreshing(false);
         },500);

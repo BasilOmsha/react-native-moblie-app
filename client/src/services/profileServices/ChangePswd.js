@@ -9,8 +9,8 @@ const delay = ms => new Promise(
   );
 const CheckCurrent = async (userContext, labelContext) => {
     try {
-        let response = await fetch("http://10.0.2.2:3000/rest/services/checkpswd", {
-            // let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/getUserData", {
+        // let response = await fetch("http://10.0.2.2:3000/rest/services/checkpswd", {
+            let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/checkpswd", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,8 +38,8 @@ const CheckCurrent = async (userContext, labelContext) => {
 const UpdatePswd = async (userContext, labelContext, authContext) => {
     labelContext.setLoading(true);
     try {
-        let response = await fetch("http://10.0.2.2:3000/rest/services/updateUserPswd", {
-            // let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/getUserData", {
+        // let response = await fetch("http://10.0.2.2:3000/rest/services/updateUserPswd", {
+            let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/updateUserPswd", {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
