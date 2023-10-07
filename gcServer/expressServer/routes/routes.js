@@ -4,31 +4,28 @@ const passport = require('passport');
 const { verifyCallback } = require('../helpers/authenticate.js');
 const signupController = require('../controllers/signup.js');
 const { validateSignupForm, validation } = require('../helpers/signup-validation.js');
-const { getUserByEmail } = require('../controllers/getUserById.js');
-const { updateUserByEmail } = require('../controllers/updateUserById.js');
-const { validateProfileForm, validationProfile } = require('../helpers/userUpdate-valid.js');
+const { getUserById } = require('../controllers/getUserById.js');
+const { updateUserById, updatePaswdById, checkExistingPswd } = require('../controllers/updateUserById.js');
+const { validateProfileForm, validationProfile, validatePswdupdated, validationPswd } = require('../helpers/userUpdate-valid.js');
 
-// Signup page
-router.get('/rest/services/registration', signupController.signupForm);
 
-// Validate signup
-router.post('/rest/services/clientValidation', validateSignupForm, validation);
+// Signup routes
+router.get('/rest/services/registration', signupController.signupForm); //Web from
+router.post('/rest/services/clientValidation', validateSignupForm, validation); // Validate signup
+router.post('/rest/services/signup', validateSignupForm, validation, signupController.signup);// JSON Signup function
+router.post('/rest/services/signup2', validateSignupForm, validation, signupController.signup2); //  application/x-www-form-urlencoded Signup function
 
-// Validate update
-router.post('/rest/services/updateValidation', validateProfileForm, validationProfile);
+// User Profile routes
+router.post('/rest/services/getUserData', getUserById); // Get logged user's data
+router.post('/rest/services/updateValidation', validateProfileForm, validationProfile); // validate update form 
+router.post('/rest/services/pswdValidation', validatePswdupdated, validationPswd); // new paswds validation
+router.put('/rest/services/updateUserData',validateProfileForm, validationProfile, updateUserById); // update user date
+router.post('/rest/services/checkpswd', checkExistingPswd); // verify user current paswd
+router.patch('/rest/services/updateUserPswd', validatePswdupdated, validationPswd, updatePaswdById); // Update user paswer
 
-// JSON Signup function
-router.post('/rest/services/signup', validateSignupForm, validation, signupController.signup);
-//  application/x-www-form-urlencoded Signup function
-router.post('/rest/services/signup2', validateSignupForm, validation, signupController.signup2);
-
-router.post('/rest/services/login', verifyCallback);
-
-router.post('/rest/services/getUserData', getUserByEmail);
-
-router.put('/rest/services/updateUserData',validateProfileForm, validationProfile, updateUserByEmail);
-
-router.get('/rest/services/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+// Login routes
+router.post('/rest/services/login', verifyCallback); // verify password and email
+router.get('/rest/services/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => { // verify user token
     try {
         res.status(200).json({ success: true, msg: "You are successfully authenticated to this route!", exp: res.expires });
     } catch (error) {

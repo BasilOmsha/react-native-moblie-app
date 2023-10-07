@@ -15,6 +15,7 @@ export const Labels = ({ children }) => {
     const [isFocusEmail, setIsFocusEmail] = useState(false);
     const [isFocusPaswd, setIsFocusPaswd] = useState(false);
     const [isFocusConfPaswd, setIsFocusConfPaswd] = useState(false);
+    const [isFocusNewPaswd, setIsFocusNewPaswd] = useState(false);
     const [isFocusDay, setIsFocusDay] = useState(false);
     const [isFocusMonth, setIsFocusMonth] = useState(false);
     const [isFocusYear, setIsFocusYear] = useState(false);
@@ -22,7 +23,7 @@ export const Labels = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [isRegistraionSuccess, setIsRegistraionSuccess] = useState(false);
     const [errortext, setErrortext] = useState('');
-
+    
     const renderLablFName = () => {
         if (isFocusFname) {
             return (
@@ -71,6 +72,17 @@ export const Labels = ({ children }) => {
             return (
                 <Text style={[styles.label, isFocusConfPaswd && { color: 'blue' }]}>
                     Confirm Password
+                </Text>
+            );
+        }
+        return null;
+    }
+
+    const renderLablNewPaswd = () => {
+        if (isFocusConfPaswd) {
+            return (
+                <Text style={[styles.label, isFocusNewPaswd && { color: 'blue' }]}>
+                    New Password
                 </Text>
             );
         }
@@ -130,6 +142,8 @@ export const Labels = ({ children }) => {
             setIsFocusPaswd,
             isFocusConfPaswd,
             setIsFocusConfPaswd,
+            isFocusNewPaswd,
+            setIsFocusNewPaswd,
             isFocusDay,
             setIsFocusDay,
             isFocusMonth,
@@ -149,10 +163,11 @@ export const Labels = ({ children }) => {
             renderLablEmail,
             renderLablPaswd,
             renderLablConfPaswd,
+            renderLablNewPaswd,
             renderLablDay,
             renderLablMonth,
             renderLablYear,
-            renderLablGender
+            renderLablGender,
         }}>
             {children}
         </SignupFormContext.Provider>

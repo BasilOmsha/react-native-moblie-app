@@ -59,16 +59,18 @@ const profileStyle = StyleSheet.create({
         fontSize: 16,
     },
     saveButton: {
-        backgroundColor: '#fff',
-        padding: 20,
+        backgroundColor: '#27aae2',
+        color: '#fff',
+        borderColor: '#27aae2',
+        width: '100%',
+        alignItems: 'center',
         marginBottom: 5,
-        flexDirection: 'row',
     },
     saveButtonText: {
-        color: '#000',
-        fontSize: 15,
-        fontFamily: 'Inter-Bold',
-        width: '100%',
+        color: '#fff',
+        paddingVertical: 10,
+        fontSize: 16,
+        fontWeight: 'bold'
     },
     ChangePaswdButton: {
         backgroundColor: '#fff',
@@ -80,7 +82,7 @@ const profileStyle = StyleSheet.create({
         color: '#000',
         fontSize: 15,
         width: '100%',
-        fontFamily: 'Inter-Bold',
+        fontFamily: 'Roboto-MediumItalic',
     },
 
 });

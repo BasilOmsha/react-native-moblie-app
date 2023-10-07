@@ -13,19 +13,19 @@ export const Auth = ({ children }) => {
     const [userInfo, setUserInfo] = useState(null);
 
     const logout = async () => {
-        setUserToken(null);
-        setUserInfo(null);
-
         try {
             await EncryptedStorage.removeItem('userToken');
             await EncryptedStorage.removeItem('userInfo');
+            await EncryptedStorage.clear();
+            setUserToken(null);
+            setUserInfo(null);
         } catch (error) {
             console.log(`Error ${error}`);
         }
     }
     return (
         <AuthContext.Provider value={{
-             userInfo, setUserInfo, userToken, setUserToken,  logout, userAccessToken, setUserAccessToken
+            userInfo, setUserInfo, userToken, setUserToken, logout, userAccessToken, setUserAccessToken
         }}>
             {children}
         </AuthContext.Provider>

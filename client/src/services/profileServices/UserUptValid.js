@@ -50,4 +50,37 @@ const UpdateValid = async (userUpdateObj, setErrortext) => {
     }
 }
 
-export { UpdateValid};
+const PswdValid = async (newPswdObj, setErrortext) => {
+    const { newPaswd, paswdConfirm } = newPswdObj;
+    try {
+         let response = await fetch("http://10.0.2.2:3000/rest/services/pswdValidation",
+        //  let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/updateValidation",
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newPswdObj)
+            });
+        if (response.status === 404) {
+            // Handle 404 error gracefully
+            updateError("Resource not found", setErrortext);
+            return false; // Indicate that the form is not valid
+        }
+        let json = await response.json();
+        if (json.errors.newPaswd) {
+            // return updateError('First name should be at least two characters!', setErrors);
+            return updateError(json.errors.newPaswd, setErrortext);
+        }
+        if (json.errors.paswdConfirm) {
+            return updateError(json.errors.paswdConfirm, setErrortext);
+        }
+        return false;
+    } catch (error) {
+        console.log("The error: " + error);
+        updateError("An error occurred while validating the form.", setErrortext);
+        return false; // Indicate that the form is not valid
+    }
+}
+
+export { UpdateValid, PswdValid};

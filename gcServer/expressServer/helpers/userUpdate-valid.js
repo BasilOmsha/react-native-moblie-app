@@ -100,7 +100,55 @@ const validationProfile = async (req, res, next) => {
     res.json({ errors });
 };
 
+
+const validatePswdupdated =
+    [
+        body('newPaswd')
+            .trim()
+            .notEmpty()
+            .withMessage('New password field is empty')
+            .isStrongPassword({
+                minLength: 8,
+                minUppercase: 1,
+                minLowercase: 1,
+                minSymbols: 1,
+                minNumbers: 1
+            })
+            .withMessage('New password must be at least 8 characters, contain numbers, lowercase, uppercase, and symbols.')
+            .escape(),
+
+        body('paswdConfirm')
+            .trim()
+            .notEmpty()
+            .withMessage('New confirmed password field is empty')
+            .custom(async (value, { req }) => {
+                if (value !== await req.body.newPaswd) {
+                    throw new Error('New passowrds do not match');
+                }
+                return true
+            })
+    ];
+
+
+const validationPswd = async (req, res, next) => {
+    const result = validationResult(req).array();
+    if (!result.length) {
+        return next();
+    }
+    const errors = {};
+    result.forEach((error) => {
+        const field = error.path;
+        const message = error.msg;
+        errors[field] = message;
+    });
+    console.log(errors);
+    res.json({ errors });
+};
+
+
 module.exports = {
     validateProfileForm,
-    validationProfile
+    validationProfile,
+    validatePswdupdated,
+    validationPswd
 };

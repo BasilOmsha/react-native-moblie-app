@@ -37,9 +37,9 @@ const loginStyle = StyleSheet.create({
         width: 200,
         alignItems: 'center',
         borderRadius: 8,
-        marginLeft: 105,
+        marginLeft: 95,
         marginRight: 95,
-        marginTop: 5,
+        marginTop: 10,
         marginBottom: 5,
     },
 
@@ -53,7 +53,7 @@ const loginStyle = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: 80,
-        marginLeft: 95,
+        marginLeft: 85,
     },
     signuplink: {
         borderWidth: 0,

@@ -233,7 +233,6 @@ const ProfileScreen = ({ navigation }) => {
                     <Text style={styles.saveButtonText}>
                         SAVE
                     </Text>
-                    <MaterialIcons name="arrow-forward" size={15} color="#000" />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.ChangePaswdButton}
                     onPress={() => {

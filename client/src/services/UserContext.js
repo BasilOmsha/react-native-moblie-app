@@ -13,7 +13,9 @@ export const User = ({ children }) => {
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [paswdConfirm, setConfirmPaswd] = useState();
+    const [currentPswd, setCurrentPswd] = useState('');
+    const [paswdConfirm, setConfirmPaswd] = useState('');
+    const [newPaswd, setNewPaswd] = useState('');
     const [day, setDay] = useState();
     const [month, setMonth] = useState();
     const [year, setYear] = useState();
@@ -31,8 +33,14 @@ export const User = ({ children }) => {
     const passwordInputHandler = (enteredText) => {
         setPassword(enteredText);
     };
+    const currentPswdInputHandler = (enteredText) => {
+        setCurrentPswd(enteredText);
+    };
     const confirmPaswdInputHandler = (enteredText) => {
         setConfirmPaswd(enteredText);
+    };
+    const newPaswdInputHandler = (enteredText) => {
+        setNewPaswd(enteredText);
     };
     const dayInputHandler = (enteredText) => {
         setDay(enteredText);
@@ -92,11 +100,22 @@ export const User = ({ children }) => {
         "email": email
     }
 
+    const pswdObject = {
+        "_id": _id,
+        "currentPswd": currentPswd,
+    }
+
+    const newPswdObj = {
+        "_id": _id,
+        "newPaswd": newPaswd,
+        "paswdConfirm": paswdConfirm
+    }
+
     return (
         <UserContext.Provider value={{
             firstname, firstnameInputHandler, setFirstname, lastname, lastnameInputHandler, setLastname, email, setEmail, emailInputHandler,
-            password, setPassword, passwordInputHandler, paswdConfirm, confirmPaswdInputHandler, day, setDay, dayInputHandler, month, setMonth, monthInputHandler, year, setYear, yearInputHandler,
-            gender, setGender, genderInputHandler, resObject, loginObject, userObject, emailObject, userUpdateObj, _id, set_id
+            password, setPassword, passwordInputHandler, paswdConfirm, setConfirmPaswd, confirmPaswdInputHandler, day, setDay, dayInputHandler, month, setMonth, monthInputHandler, year, setYear, yearInputHandler,
+            gender, setGender, genderInputHandler, resObject, loginObject, userObject, emailObject, userUpdateObj, _id, set_id, newPaswd, setNewPaswd, newPaswdInputHandler, currentPswd, setCurrentPswd, currentPswdInputHandler, pswdObject, newPswdObj 
         }}>
             {children}
         </UserContext.Provider>
