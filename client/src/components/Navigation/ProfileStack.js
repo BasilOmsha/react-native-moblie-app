@@ -44,6 +44,8 @@ const ProfileStack = () => {
                 name="Saved"
                 component={SavedFlights}
                 options={{
+                    headerStyle: { backgroundColor: '#27aae2' }, headerTintColor: '#fff',
+                    headerTitle: 'Favorites',
                     drawerIcon: ({ color }) => (
                         <Ionicons name="heart-outline" size={22} color={color} />
                     ),
@@ -53,6 +55,8 @@ const ProfileStack = () => {
                 name="Purchases"
                 component={PurchasedFlights}
                 options={{
+                    headerStyle: { backgroundColor: '#27aae2' }, headerTintColor: '#fff',
+                    headerTitle: 'Purchases',
                     drawerIcon: ({ color }) => (
                         <Ionicons name="basket-outline" size={22} color={color} />
                     ),
