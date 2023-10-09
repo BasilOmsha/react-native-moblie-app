@@ -8,6 +8,7 @@ const delay = ms => new Promise(
     resolve => setTimeout(resolve, ms)
   );
 const CheckCurrent = async (userContext, labelContext) => {
+    labelContext.setLoading(true);
     try {
         // let response = await fetch("http://10.0.2.2:3000/rest/services/checkpswd", {
             let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/checkpswd", {
@@ -23,11 +24,13 @@ const CheckCurrent = async (userContext, labelContext) => {
             console.log("somthing3")
             console.log(`! Status: ${response.status}`);
             updateError(json.msg, labelContext.setErrortext);
+            labelContext.setLoading(false);
             return false;
         }
         else {
             console.log("msg: " + json.msg);
             updateError(json.msg, labelContext.setErrortext);
+            labelContext.setLoading(false);
             return true;
         }
     } catch (error) {
