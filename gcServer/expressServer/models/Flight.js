@@ -1,62 +1,43 @@
 const mongoose = require('mongoose');
 
-// Define the Flight schema
-const flightSchema = new mongoose.Schema({
+const oneWayFavFlightSchema = new mongoose.Schema({
     from: {
-        country: {
-            type: String,
-            required: true
-        },
-        airport: {
-            type: String,
-            required: true
-        },
+        country: String,
+        airport: String,
+        capitalCity: String
     },
     to: {
-        country: {
-            type: String,
-            required: true
-        },
-        airport: {
-            type: String,
-            required: true
-        },
+        country: String,
+        airport: String,
+        capitalCity: String
     },
-    departureTime: {
-        type: Date,
-        required: true
-    },
-    arrivalTime: {
-        type: Date,
-        required: true
-    },
-    isDirectFlight: {
-        type: Boolean,
-        required: true
-    },
-    stopoverCountry: {
-        type: String,
-        required: true
-    },
-    airline: {
-        type: String,
-        required: true
-    },
-    duration: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    seatNumber: {
-        type: Number,
-        required: true
-    }
+    departureTime: Date,
+    arrivalTime: Date,
+    isDirectFlight: Boolean,
+    stopoverCountry: String,
+    airline: String,
+    duration: String,
+    price: Number
 });
 
-// Create the Flight model
-const Flight = mongoose.model('Flight', flightSchema);
+const roundTripFavFlightSchema = new mongoose.Schema({
+    outbound: oneWayFavFlightSchema,
+    return: oneWayFavFlightSchema
+});
 
-module.exports = Flight;
+// const tripSchema = new mongoose.Schema({
+//     outboundFlights: [oneWayFlightSchema], // Array of one-way flights
+//     returnFlights: [roundTripFlightSchema], // Array of round-trip flights
+//     capitalCityFrom: String,
+//     capitalCityTo: String
+// });
+
+const FaveOneWayFlight = mongoose.model('favoriteOneWayFlights', oneWayFavFlightSchema);
+const FaveRoundTripFlight = mongoose.model('favoriteRoundTripFlights', roundTripFavFlightSchema);
+// const Trip = mongoose.model('Trip', tripSchema);
+
+module.exports = {
+    FaveOneWayFlight,
+    FaveRoundTripFlight,
+    // Trip
+};
