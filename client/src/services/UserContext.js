@@ -20,6 +20,8 @@ export const User = ({ children }) => {
     const [month, setMonth] = useState();
     const [year, setYear] = useState();
     const [gender, setGender] = useState();
+    const [favoriteOneWayFlights, setFavoriteOneWayFlights] = useState([]);
+    const [favoriteRoundTripFlights, setFavoriteRoundTripFlights] = useState([]);
 
     const firstnameInputHandler = (enteredText) => {
         setFirstname(enteredText);
@@ -115,7 +117,11 @@ export const User = ({ children }) => {
         <UserContext.Provider value={{
             firstname, firstnameInputHandler, setFirstname, lastname, lastnameInputHandler, setLastname, email, setEmail, emailInputHandler,
             password, setPassword, passwordInputHandler, paswdConfirm, setConfirmPaswd, confirmPaswdInputHandler, day, setDay, dayInputHandler, month, setMonth, monthInputHandler, year, setYear, yearInputHandler,
-            gender, setGender, genderInputHandler, resObject, loginObject, userObject, emailObject, userUpdateObj, _id, set_id, newPaswd, setNewPaswd, newPaswdInputHandler, currentPswd, setCurrentPswd, currentPswdInputHandler, pswdObject, newPswdObj 
+            gender, setGender, genderInputHandler, resObject, loginObject, userObject, emailObject, userUpdateObj, _id, set_id, newPaswd, setNewPaswd, newPaswdInputHandler, currentPswd, setCurrentPswd, currentPswdInputHandler, pswdObject, newPswdObj,
+            favoriteOneWayFlights,
+            setFavoriteOneWayFlights,
+            favoriteRoundTripFlights,
+            setFavoriteRoundTripFlights, 
         }}>
             {children}
         </UserContext.Provider>

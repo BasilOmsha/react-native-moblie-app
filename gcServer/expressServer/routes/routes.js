@@ -7,6 +7,9 @@ const { validateSignupForm, validation } = require('../helpers/signup-validation
 const { getUserById } = require('../controllers/getUserById.js');
 const { updateUserById, updatePaswdById, checkExistingPswd } = require('../controllers/updateUserById.js');
 const { validateProfileForm, validationProfile, validatePswdupdated, validationPswd } = require('../helpers/userUpdate-valid.js');
+const { addFlightsToFavorite } = require('../controllers/addFavflights.js');
+const { getFavoritesByUserId } = require('../controllers/readFavFlights.js');
+const { deleteFavFlightsByid } = require('../controllers/deleFavFlights.js');
 
 
 // Signup routes
@@ -22,6 +25,9 @@ router.post('/rest/services/pswdValidation', validatePswdupdated, validationPswd
 router.put('/rest/services/updateUserData',validateProfileForm, validationProfile, updateUserById); // update user date
 router.post('/rest/services/checkpswd', checkExistingPswd); // verify user current paswd
 router.patch('/rest/services/updateUserPswd', validatePswdupdated, validationPswd, updatePaswdById); // Update user paswer
+router.post('/rest/services/addToFavorite', addFlightsToFavorite);
+router.post('/rest/services/readfav', getFavoritesByUserId);
+router.post('/rest/services/deletefav', deleteFavFlightsByid);
 
 // Login routes
 router.post('/rest/services/login', verifyCallback); // verify password and email
