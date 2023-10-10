@@ -4,18 +4,32 @@ const { generateRandomFlight } = require("../utils/generateRandomFlight");
 const { europeanCountriesWithAirports } = require("../data");
 
 router.get("/", (req, res) => {
-  const { from, to, date, round, returnDate } = req.query;
+  const {
+    from,
+    to,
+    date,
+    round,
+    returnDate,
+    selectedAirline,
+    selectedMaxDuration,
+    selectedStops,
+  } = req.query;
 
+  // Find the country objects for both 'from' and 'to' based on the country names
   const countryFrom = europeanCountriesWithAirports.find(
-    (entry) => entry.country === from
+    (entry) => entry.capitalCity === from
   );
   const countryTo = europeanCountriesWithAirports.find(
-    (entry) => entry.country === to
+    (entry) => entry.capitalCity === to
   );
 
   if (!countryFrom || !countryTo) {
     return res.status(400).json({ error: "Invalid country name" });
   }
+
+  // Now, you can access the capital cities as needed
+  const capitalCityFrom = countryFrom.country;
+  const capitalCityTo = countryTo.country;
 
   const startDate = new Date(date);
   if (isNaN(startDate.getTime())) {
@@ -31,13 +45,20 @@ router.get("/", (req, res) => {
       const outboundStartDate = new Date(startDate);
       outboundStartDate.setDate(outboundStartDate.getDate() + index);
 
-      return generateRandomFlight(
+      const filteredFlights = generateRandomFlight(
         countryFrom.airport,
         countryTo.airport,
         outboundStartDate,
         from,
-        to
+        to,
+        selectedAirline,
+        selectedMaxDuration,
+        selectedStops,
+        capitalCityFrom,
+        capitalCityTo
       );
+
+      return filteredFlights; // Return filtered flights
     }
   );
 
@@ -57,7 +78,12 @@ router.get("/", (req, res) => {
         countryTo.airport,
         outboundStartDate,
         from,
-        to
+        to,
+        selectedAirline,
+        selectedMaxDuration,
+        selectedStops,
+        capitalCityFrom,
+        capitalCityTo
       );
 
       const returnFlight = generateRandomFlight(
@@ -65,14 +91,24 @@ router.get("/", (req, res) => {
         countryFrom.airport,
         returnFlightStartDate,
         to,
-        from
+        from,
+        selectedAirline,
+        selectedMaxDuration,
+        selectedStops,
+        capitalCityTo,
+        capitalCityFrom
       );
 
       return { outbound: outboundFlight[index], return: returnFlight[index] };
     });
   }
 
-  res.json({ outboundFlights, returnFlights }); // Include both outbound and return flights in the response
+  res.json({
+    outboundFlights,
+    returnFlights,
+    capitalCityFrom, // Include capital cities in the response if needed
+    capitalCityTo,
+  });
 });
 
 module.exports = router;
