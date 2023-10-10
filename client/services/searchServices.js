@@ -8,9 +8,12 @@ export const fetchLocations = async (
   date,
   round = false, // Default round trip to false
   returnDate, // The return date for round trip
+  selectedAirline,
+  selectedMaxDuration,
+  selectedStops,
 ) => {
   try {
-    let apiUrl = `http://${API_BASE_URI}/search?from=${from}&to=${to}&date=${date}`;
+    let apiUrl = `http://${API_BASE_URI}/search?from=${from}&to=${to}&date=${date}&selectedAirline=${selectedAirline}&selectedMaxDuration=${selectedMaxDuration}&selectedStops=${selectedStops}`;
 
     // Include round trip parameters if round is true and returnDate is provided
     if (round && returnDate) {
