@@ -7,7 +7,7 @@ const FlightSearchResults = ({route, navigation}) => {
   const {round, combinedFlights, data} = route.params;
 
   return (
-    <View style={{backgroundColor: 'white', flex: 1}}>
+    <View style={{backgroundColor: '#F5F5F5', flex: 1}}>
       {round ? (
         <FlightListReturn data={combinedFlights} round={round} />
       ) : (
