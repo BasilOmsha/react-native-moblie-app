@@ -25,12 +25,19 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    bookedFlights: [
+    favoriteOneWayFlights: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Booking',
+            ref: 'favoriteOneWayFlights' // Reference to OneWayFlight schema
         },
     ],
+
+    favoriteRoundTripFlights: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'favoriteRoundTripFlights' // Reference to RoundTripFlight schema
+        },
+    ]
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -6,4 +6,5 @@ const App = () => (
     <NavButton />
   </DataProvider>
 );
+
 export default App;
