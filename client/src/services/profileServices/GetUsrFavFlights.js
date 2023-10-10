@@ -20,7 +20,7 @@ const GetUsrFavFlights = async (authContext, userContext, labelContext) => {
     const idObj = { "_id": info };
     try {
         let response = await fetch("http://10.0.2.2:3000/rest/services/readfav", {
-            // let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/getUserData", {
+            // let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/readfav", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
