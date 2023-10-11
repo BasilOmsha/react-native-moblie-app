@@ -4,6 +4,7 @@ const DataContext = createContext();
 
 export const DataProvider = ({children}) => {
   const [globalData, setGlobalData] = useState([]);
+  const [selectedReturnFlight, setSelectedReturnFlight] = useState([]);
   const [selectedFlightGlobal, setSelectedFlightGlobal] = useState([]);
 
   const addData = newData => {
@@ -13,10 +14,20 @@ export const DataProvider = ({children}) => {
   const addSelectedData = newData => {
     setSelectedFlightGlobal(newData);
   };
+  const addReturnFlight = newData => {
+    setSelectedReturnFlight(newData);
+  };
 
   return (
     <DataContext.Provider
-      value={{globalData, selectedFlightGlobal, addData, addSelectedData}}>
+      value={{
+        globalData,
+        selectedFlightGlobal,
+        selectedReturnFlight,
+        addData,
+        addSelectedData,
+        addReturnFlight,
+      }}>
       {children}
     </DataContext.Provider>
   );
