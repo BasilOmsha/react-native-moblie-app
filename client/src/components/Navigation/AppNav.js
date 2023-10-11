@@ -22,11 +22,11 @@ const ProtectedStack = () => {
 const AppNav = () => {
     const authContext = useAuthContext();
 
-    return (
-        <NavigationContainer>
+    // return (
+        // <NavigationContainer>
             {authContext.userToken !== null ? <ProtectedStack /> : <AuthStack />}
-        </NavigationContainer>
-    );
+        // {/* </NavigationContainer> */}
+    // );
 };
 
 export default AppNav;
