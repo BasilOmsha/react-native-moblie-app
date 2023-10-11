@@ -1,22 +1,43 @@
-import React, {useState} from 'react';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
-import {formatTime} from '../../helper/helper';
-import {styles} from '../../styles/globalStyles';
-import {useData} from '../../context/globalData';
-import {useNavigation} from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
+import { formatTime } from '../../helper/helper';
+import { styles } from '../../styles/globalStyles';
+import { useData } from '../../context/globalData';
+import { useNavigation } from '@react-navigation/native';
+import { useUserContext } from '../../src/services/UserContext';
+import { useAuthContext } from '../../src/services/loginServices/AuthContext';
+import { useSignupFormContext } from '../../src/services/signupServices/SignupLabelsContext';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import AddUsrFavFlights from '../../src/services/profileServices/AddUsrFavFlights';
 
-function FlightListOutbound({data}) {
+function FlightListOutbound({ data }) {
   const navigation = useNavigation();
   //Global variable
-  const {selectedFlightGlobal, addSelectedData} = useData();
+  const { selectedFlightGlobal, addSelectedData } = useData();
+
   const handleFlightSelection = flightData => {
     addSelectedData(flightData);
     navigation.navigate('FlightDetails');
   };
+
+  const authContext = useAuthContext();
+  const labelContext = useSignupFormContext();
+  const userContext = useUserContext();
+  const addToFav = async (selectedFlightGlobal) => {
+    if (!authContext.userToken) {
+      Alert.alert('        You need to be logged in!', '', [], { cancelable: true, });
+    }
+    if (authContext.userToken) {
+      console.log("selectedFlight: " + selectedFlightGlobal.airline);
+      console.log("selectedFlight: " + selectedFlightGlobal.from.country);
+      await AddUsrFavFlights(authContext, labelContext, userContext, selectedFlightGlobal)
+    }
+  }
+
   return (
     <FlatList
       data={data}
-      renderItem={({item: outboundFlights}) =>
+      renderItem={({ item: outboundFlights }) =>
         outboundFlights.map((flight, index) => (
           <TouchableOpacity
             onPress={() => handleFlightSelection(flight)} // Pass the flight data to the handler
@@ -59,9 +80,9 @@ function FlightListOutbound({data}) {
                   <Text
                     style={{
                       color: '#27aae2',
-                      right:20,
+                      right: 20,
                       top: 15,
-                                          }}>
+                    }}>
                     ➢
                   </Text>
                 </View>
@@ -83,7 +104,12 @@ function FlightListOutbound({data}) {
               </View>
               <View style={styles.airline}>
                 <Text style={styles.airlineb}>{flight.airline}</Text>
-                <Text style={styles.airlineb}>{flight.from.airport}</Text>
+                <View style={styles.favbutton}>
+                  <Text style={styles.airlineb}>{flight.from.airport}</Text>
+                  <TouchableOpacity onPress={() => addToFav(flight)} >
+                    <FontAwesome5Icon name="star" size={15} color="#000" />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </TouchableOpacity>

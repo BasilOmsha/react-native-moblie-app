@@ -5,15 +5,15 @@ import NavButton from './components/navigation/mainAppNav';
 import { DataProvider } from './context/globalData';
 
 const App = () => (
-  <User>
-    <Labels>
-      <Auth>
-        <DataProvider>
+  <DataProvider>
+    <User>
+      <Labels>
+        <Auth>
           <NavButton />
-        </DataProvider>
-      </Auth>
-    </Labels>
-  </User>
+        </Auth>
+      </Labels>
+    </User>
+  </DataProvider>
 );
 
 export default App;
