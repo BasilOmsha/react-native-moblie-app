@@ -5,8 +5,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import UserProfile from '../profilePage/UserProfile';
 import HomePage from '../homePage/HomePage';
 import FlightSearchResults from '../flightSearchResults/flightSearchResults';
-import FlightHeader from '../../flightSearchHeader/flightHeaderDate';
-import FlightDetails from '../flightDetails/flightDetails';
+import FlightDetails from '../flightDetails/flightOutboundDetails';
+import FlightHeader from '../flightSearchHeader/flightHeaderDate';
+import FlightReturnDetails from '../flightDetails/flightReturnDetails';
+import {TicketPurchase} from '../ticketPurchase/ticketPurchase';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -26,7 +28,9 @@ const HomeStackScreen = () => (
       }}
       component={FlightSearchResults}
     />
-    <Stack.Screen name="FlightDetails" component={FlightDetails} />
+    <Stack.Screen name="One-way details" component={FlightDetails} />
+    <Stack.Screen name="Round trip details" component={FlightReturnDetails} />
+    <Stack.Screen name="Traveler info" component={TicketPurchase} />
   </Stack.Navigator>
 );
 

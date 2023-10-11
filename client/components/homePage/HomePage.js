@@ -129,7 +129,7 @@ function HomePage({navigation}) {
         navigation.navigate('Flights', {
           round,
           combinedFlights: response.data.returnFlights,
-          data: response.data.outboundFlights, 
+          data: response.data.outboundFlights,
         });
 
         setIsModalLoading(false);
