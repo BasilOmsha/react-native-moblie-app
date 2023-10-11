@@ -15,4 +15,5 @@ const App = () => (
     </Labels>
   </User>
 );
+
 export default App;
