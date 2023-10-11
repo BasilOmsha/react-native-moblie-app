@@ -7,11 +7,12 @@ import {useNavigation} from '@react-navigation/native';
 
 function FlightListOutbound({data}) {
   const navigation = useNavigation();
+
   //Global variable
   const {selectedFlightGlobal, addSelectedData} = useData();
   const handleFlightSelection = flightData => {
     addSelectedData(flightData);
-    navigation.navigate('FlightDetails');
+    navigation.navigate('One-way details');
   };
   return (
     <FlatList
@@ -59,9 +60,9 @@ function FlightListOutbound({data}) {
                   <Text
                     style={{
                       color: '#27aae2',
-                      right:20,
+                      right: 20,
                       top: 15,
-                                          }}>
+                    }}>
                     ➢
                   </Text>
                 </View>
