@@ -261,4 +261,22 @@ export const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: 'red',
   },
+  blueDotR: {
+    position: 'absolute',
+    top: -2,
+    right: '45%',
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: 'red',
+  },
+  blueDotB: {
+    position: 'absolute',
+    top: -2,
+    right: '55%',
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: 'red',
+  },
 });
