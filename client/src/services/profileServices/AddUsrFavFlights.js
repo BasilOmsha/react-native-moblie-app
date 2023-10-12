@@ -8,7 +8,7 @@ const updateError = (error, updateState) => {
     // }, 5000)
 }
 const AddUsrFavFlights = async (authContext, labelContext, userContext, selectedFlightGlobal) => {
-
+    // labelContext.setLoading(true);
     const favOneWayFlight = { 
         "_id": userContext._id,
         "outboundFlights": [
@@ -59,7 +59,6 @@ const AddUsrFavFlights = async (authContext, labelContext, userContext, selected
             labelContext.setLoading(false);
         } else {
             console.log(json.msg);
-
             console.log("");
 
         }

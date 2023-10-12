@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import { formatTime } from '../../helper/helper';
 import { styles } from '../../styles/globalStyles';
 import { useData } from '../../context/globalData';
@@ -8,6 +8,7 @@ import { useUserContext } from '../../src/services/UserContext';
 import { useAuthContext } from '../../src/services/loginServices/AuthContext';
 import { useSignupFormContext } from '../../src/services/signupServices/SignupLabelsContext';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import AddUsrFavFlights from '../../src/services/profileServices/AddUsrFavFlights';
 
 function FlightListOutbound({ data }) {
@@ -20,9 +21,15 @@ function FlightListOutbound({ data }) {
     navigation.navigate('FlightDetails');
   };
 
+  /*Added by Basel*/
+  // Add flights to looged user favorites
   const authContext = useAuthContext();
   const labelContext = useSignupFormContext();
   const userContext = useUserContext();
+  
+  const toggleLoading = () => {
+    setIsLoading(!isLoading);
+  };
   const addToFav = async (selectedFlightGlobal) => {
     if (!authContext.userToken) {
       Alert.alert('        You need to be logged in!', '', [], { cancelable: true, });
@@ -30,9 +37,10 @@ function FlightListOutbound({ data }) {
     if (authContext.userToken) {
       console.log("selectedFlight: " + selectedFlightGlobal.airline);
       console.log("selectedFlight: " + selectedFlightGlobal.from.country);
-      await AddUsrFavFlights(authContext, labelContext, userContext, selectedFlightGlobal)
+      await AddUsrFavFlights(authContext, labelContext, userContext, selectedFlightGlobal);
     }
   }
+  /*Added by Basel ends here*/
 
   return (
     <FlatList
@@ -106,9 +114,21 @@ function FlightListOutbound({ data }) {
                 <Text style={styles.airlineb}>{flight.airline}</Text>
                 <View style={styles.favbutton}>
                   <Text style={styles.airlineb}>{flight.from.airport}</Text>
-                  <TouchableOpacity onPress={() => addToFav(flight)} >
-                    <FontAwesome5Icon name="star" size={15} color="#000" />
+                  {/*Added by Basel*/}
+                  {/* Add flights to looged user favorites */}
+                  <TouchableOpacity onPress={() => {
+                    userContext.setLoadingItem(prevLoadingItem => [...prevLoadingItem, flight.price]); // Add index to loadingItem state list
+                    console.log("index " + flight.price);
+                    addToFav(flight);
+                    }}>
+                  { userContext.loadingItem.includes(flight.price) ?
+                  // {isLoading && index === lodaingItem ?
+                    <Ionicons name="heart-sharp" size={15} color="#000" />
+                    :
+                    <Ionicons name="heart-outline" size={15} color="#000" />
+                  }
                   </TouchableOpacity>
+                  {/*Added by Basel ends here*/}
                 </View>
               </View>
             </View>

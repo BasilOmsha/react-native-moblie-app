@@ -20,6 +20,7 @@ import isAuthenticated from '../../src/services/loginServices/IsAuthenticated';
 import { useAuthContext } from '../../src/services/loginServices/AuthContext';
 import { useSignupFormContext } from '../../src/services/signupServices/SignupLabelsContext';
 import { useUserContext } from '../../src/services/UserContext';
+import GetUserData from '../../src/services/profileServices/GetUserData';
 
 function HomePage({ navigation }) {
   const [from, setFrom] = useState('Copenhagen');
@@ -48,16 +49,19 @@ function HomePage({ navigation }) {
     setReturnDate('');
   };
 
+  /*Added by Basel*/
   // logging the user if they have a valid token and getting there data
   const authContext = useAuthContext();
-    const labelContext = useSignupFormContext();
-
-    async function triggerFunctions() {
-        await isAuthenticated(authContext, labelContext);
-    }
-    useEffect(() => {
-        triggerFunctions();
-    }, []);
+  const labelContext = useSignupFormContext();
+  const userContext = useUserContext();
+  async function triggerFunctions() {
+    await isAuthenticated(authContext, labelContext);
+    await GetUserData(authContext, userContext, labelContext);
+  }
+  useEffect(() => {
+    triggerFunctions();
+  }, []);
+  /*Added by Basel ends here*/
 
   const toggleDate = () => {
     setModalVisible(!modalVisible);

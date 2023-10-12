@@ -12,22 +12,22 @@ import Loader from '../../src/services/Loader';
 const FlightSearchResults = ({ route, navigation }) => {
   const { round, combinedFlights, data } = route.params;
 
-  // logging the user if they have a valid token and getting there data
+  /*Added by Basel*/
+  // Is the user token still valid
   const authContext = useAuthContext();
   const labelContext = useSignupFormContext();
   const userContext = useUserContext();
-
   async function triggerFunctions() {
     await IsNotAuthenticated(labelContext, authContext);
-    await GetUserData(authContext, userContext, labelContext);
   }
   useEffect(() => {
     triggerFunctions();
   }, []);
+  /*Added by Basel ends here*/
 
   return (
     <View style={{ backgroundColor: '#F5F5F5', flex: 1 }}>
-      {labelContext.loading == true ? <Loader loading={userContext.loading} /> : labelContext.loading == false}
+      
       {round ? (
         <FlightListReturn data={combinedFlights} round={round}  />
       ) : (
