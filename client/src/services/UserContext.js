@@ -22,6 +22,7 @@ export const User = ({ children }) => {
     const [gender, setGender] = useState();
     const [favoriteOneWayFlights, setFavoriteOneWayFlights] = useState([]);
     const [favoriteRoundTripFlights, setFavoriteRoundTripFlights] = useState([]);
+    const [loadingItem , setLoadingItem] = useState([]);
 
     const firstnameInputHandler = (enteredText) => {
         setFirstname(enteredText);
@@ -122,6 +123,7 @@ export const User = ({ children }) => {
             setFavoriteOneWayFlights,
             favoriteRoundTripFlights,
             setFavoriteRoundTripFlights, 
+            loadingItem , setLoadingItem
         }}>
             {children}
         </UserContext.Provider>

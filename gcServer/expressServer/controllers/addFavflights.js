@@ -21,6 +21,8 @@ const addFlightsToFavorite = async (req, res) => {
                     { $push: { favoriteOneWayFlights: oneWayFlights } }, // Assuming you have a favoriteTrips field in your User schema
                     { new: true }
                 );
+
+                return res.status(201).json({ success: true, msg: "Flight Added to Favorites!" });
             }
 
             else if (returnFlights && returnFlights.length > 0) {
@@ -37,6 +39,7 @@ const addFlightsToFavorite = async (req, res) => {
                     { $push: { favoriteRoundTripFlights: roundTripFlights } }, // Assuming you have a favoriteTrips field in your User schema
                     { new: true }
                 );
+                return res.status(201).json({ success: true, msg: "Flight Added to Favorites!" });
             } else {
                 return res.status(400).json({ success: false, error: 'Invalid flight data structure' });
             }

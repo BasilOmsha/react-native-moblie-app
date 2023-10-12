@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { Directions } from 'react-native-gesture-handler';
 
 export const styles = StyleSheet.create({
   container: {
@@ -57,6 +58,11 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     borderTopWidth: 1,
     borderTopColor: '#F3F3F3',
+  },
+  favbutton: {
+    flexDirection: 'row',
+    // backgroundColor: 'red',
+    justifyContent: 'space-between',
   },
   airlineb: {
     marginLeft: 15,

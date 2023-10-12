@@ -135,14 +135,14 @@ const FaveScreenStyle = StyleSheet.create({
 
     Price: {
         position: 'absolute',
-        width: 60,
+        width: 70,
         top: 120,
         left: 250,
         right: 60,
         marginTop: 5,
         marginLeft: 50,
         fontWeight: 'bold',
-        fontSize: 20
+        fontSize: 20,
     },
 
     AirprtFrm2: {
@@ -174,7 +174,7 @@ const FaveScreenStyle = StyleSheet.create({
 
     Price2: {
         position: 'absolute',
-        width: 60,
+        width: 70,
         top: 80,
         left: 250,
         right: 60,

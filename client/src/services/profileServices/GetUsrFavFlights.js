@@ -9,7 +9,7 @@ const updateError = (error, updateState) => {
 }
 const GetUsrFavFlights = async (authContext, userContext, labelContext) => {
     console.log("Start");
-    labelContext.setLoading(true);
+    // labelContext.setLoading(true);
     let userInfo = await EncryptedStorage.getItem('userInfo');
     userInfo = JSON.parse(userInfo);
     let info = "";
@@ -37,7 +37,7 @@ const GetUsrFavFlights = async (authContext, userContext, labelContext) => {
         if (!json) {
             // If there's an error response, update the error text
             updateError(json.msg, labelContext.setErrortext);
-            labelContext.setLoading(false);
+            // labelContext.setLoading(false);
         } else {
             console.log("Favorite One Way Flights: ", json.favoriteOneWayFlights);
 
@@ -51,9 +51,9 @@ const GetUsrFavFlights = async (authContext, userContext, labelContext) => {
         }
     } catch (error) {
         console.log("The error: " + error);
-        labelContext.setLoading(false);
+        // labelContext.setLoading(false);
     } finally {
-        labelContext.setLoading(false);
+        // labelContext.setLoading(false);
     }
 };
 

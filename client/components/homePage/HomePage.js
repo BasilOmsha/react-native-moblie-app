@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   View,
@@ -9,15 +9,20 @@ import {
   Modal,
   Image,
 } from 'react-native';
-import {fetchLocations} from '../../services/searchServices';
-import {airlines, flightDurations24H, stops} from '../../data/data';
-import {capitalizeFirstLetter, formatDate} from '../../helper/helper';
-import {styles} from '../../styles/globalStyles';
-import CalendarPicker from 'react-native-calendar-picker';
-import {ModalScrollView} from '../flatList/modalScrollView';
-import {useData} from '../../context/globalData';
+import { fetchLocations } from '../../services/searchServices';
+import { airlines, flightDurations24H, stops } from '../../data/data';
+import { capitalizeFirstLetter, formatDate } from '../../helper/helper';
+import { styles } from '../../styles/globalStyles';
+// import CalendarPicker from 'react-native-calendar-picker';
+import { ModalScrollView } from '../flatList/modalScrollView';
+import { useData } from '../../context/globalData';
+import isAuthenticated from '../../src/services/loginServices/IsAuthenticated';
+import { useAuthContext } from '../../src/services/loginServices/AuthContext';
+import { useSignupFormContext } from '../../src/services/signupServices/SignupLabelsContext';
+import { useUserContext } from '../../src/services/UserContext';
+import GetUserData from '../../src/services/profileServices/GetUserData';
 
-function HomePage({navigation}) {
+function HomePage({ navigation }) {
   const [from, setFrom] = useState('Copenhagen');
   const [to, setTo] = useState('Helsinki');
   const [date, setDate] = useState(new Date());
@@ -36,13 +41,27 @@ function HomePage({navigation}) {
   const [isDurationModalVisible, setIsDurationModalVisible] = useState(false);
   const [isStopsModalVisible, setIsStopsModalVisible] = useState(false);
   const [isModalLoading, setIsModalLoading] = useState('');
-  const {globalData, addData} = useData();
+  const { globalData, addData } = useData();
   const handleOneWay = () => {
     setRound(false);
     setIsOneWayPressed(true);
     setIsReturnPressed(false);
     setReturnDate('');
   };
+
+  /*Added by Basel*/
+  // logging the user if they have a valid token and getting there data
+  const authContext = useAuthContext();
+  const labelContext = useSignupFormContext();
+  const userContext = useUserContext();
+  async function triggerFunctions() {
+    await isAuthenticated(authContext, labelContext);
+    await GetUserData(authContext, userContext, labelContext);
+  }
+  useEffect(() => {
+    triggerFunctions();
+  }, []);
+  /*Added by Basel ends here*/
 
   const toggleDate = () => {
     setModalVisible(!modalVisible);
@@ -140,7 +159,7 @@ function HomePage({navigation}) {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: '#F3F3F3'}}>
+    <View style={{ flex: 1, backgroundColor: '#F3F3F3' }}>
       {loading && (
         <View style={styles.circle}>
           <Modal visible={isModalLoading}>
@@ -163,7 +182,7 @@ function HomePage({navigation}) {
             />
             <ActivityIndicator
               size={100}
-              style={{position: 'absolute', top: 400, left: 148}}
+              style={{ position: 'absolute', top: 400, left: 148 }}
               color="#5F6A6A"
             />
 
@@ -251,7 +270,7 @@ function HomePage({navigation}) {
       </TouchableOpacity>
       <View style={styles.dateInput}>
         <TouchableOpacity onPress={toggleDate}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <TextInput
               style={styles.textBold}
               placeholder={`Date ${new Date().toLocaleDateString('en-US', {
@@ -261,13 +280,13 @@ function HomePage({navigation}) {
               value={date}
               editable={false}
             />
-            <Text style={{fontSize: 22}}>🗓️</Text>
+            <Text style={{ fontSize: 22 }}>🗓️</Text>
           </View>
         </TouchableOpacity>
 
         <Modal visible={modalVisible} animationType="slide" transparent={true}>
           <View style={styles.modalPage}>
-            <CalendarPicker
+            {/* <CalendarPicker
               minDate={new Date()}
               selectedStartDate={date}
               onDateChange={selectedDate => {
@@ -282,14 +301,14 @@ function HomePage({navigation}) {
               selectedDayTextColor="white"
               todayBackgroundColor="lightgray"
               todayTextStyle={{fontWeight: 'bold'}}
-            />
+            /> */}
             <Button title="cancel" onPress={toggleDate}></Button>
           </View>
         </Modal>
 
         {round && (
           <TouchableOpacity onPress={toggleReturnDate}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <TextInput
                 style={styles.textBold}
                 placeholder={`Return ${new Date().toLocaleDateString('en-US', {
@@ -299,7 +318,7 @@ function HomePage({navigation}) {
                 value={returnDate}
                 editable={false}
               />
-              <Text style={{fontSize: 22}}>🗓️</Text>
+              <Text style={{ fontSize: 22 }}>🗓️</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -308,7 +327,7 @@ function HomePage({navigation}) {
           animationType="slide"
           transparent={true}>
           <View style={styles.modalPage}>
-            <CalendarPicker
+            {/* <CalendarPicker
               minDate={new Date()}
               selectedStartDate={returnDate}
               onDateChange={selectedDate => {
@@ -323,7 +342,7 @@ function HomePage({navigation}) {
               selectedDayTextColor="white"
               todayBackgroundColor="lightgray"
               todayTextStyle={{fontWeight: 'bold'}}
-            />
+            /> */}
             <Button title="cancel" onPress={toggleReturnDate}></Button>
           </View>
         </Modal>
@@ -338,7 +357,7 @@ function HomePage({navigation}) {
             padding: 10,
             borderRadius: 8,
           }}>
-          <View style={{backgroundColor: 'red', width: 4}}>
+          <View style={{ backgroundColor: 'red', width: 4 }}>
             <Text></Text>
           </View>
 
@@ -368,7 +387,7 @@ function HomePage({navigation}) {
               </Text>
             )}
           </View>
-          <View style={{marginRight: 10}}>
+          <View style={{ marginRight: 10 }}>
             {selectedStops && (
               <Text style={selectedStops && styles.filterResults}>
                 Stops: {selectedStops}
@@ -388,7 +407,7 @@ function HomePage({navigation}) {
         </View>
       )}
 
-      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         <TouchableOpacity onPress={fetchData}>
           <Text style={styles.buttonsF}>Search flight</Text>
         </TouchableOpacity>

@@ -4,7 +4,8 @@ import { useSignupFormContext } from '../../services/signupServices/SignupLabels
 import isAuthenticated from '../../services/loginServices/IsAuthenticated';
 import { useAuthContext } from '../../services/loginServices/AuthContext';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FlightSVG from '../../assets/images/flight.svg'
+import FlightSVG from '../../assets/images/flight.svg';
+import HomePage from '../../../components/homePage/HomePage';
 
 const WelcomeScreen = ({ navigation }) => {
     const authContext = useAuthContext();
@@ -40,7 +41,7 @@ const WelcomeScreen = ({ navigation }) => {
                 <FlightSVG
                     width={700}
                     height={700}
-                    marginTop={90}
+                    marginTop={100}
                 // style={{ transform: [{ rotate: '15deg' }] }}
                 />
                 {/* <Image
@@ -58,7 +59,7 @@ const WelcomeScreen = ({ navigation }) => {
                     padding: 20,
                     width: '90%',
                     borderRadius: 10,
-                    marginTop: 30,
+                    marginTop: 50,
                     marginBottom: 20,
                     flexDirection: 'row',
                     justifyContent: 'space-between',
@@ -81,11 +82,11 @@ const WelcomeScreen = ({ navigation }) => {
                     padding: 20,
                     width: '90%',
                     borderRadius: 10,
-                    marginBottom: 180,
+                    marginBottom: 90,
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                 }}
-            // onPress={() => navigation.navigate('#')}
+            onPress={() => navigation.navigate('Home')}
             >
                 <Text
                     style={{
