@@ -9,6 +9,7 @@ import GetUsrFavFlights from '../../services/profileServices/GetUsrFavFlights';
 import Loader from '../../services/Loader';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from '../../styles/FavScreenStyle';
+import DeleteFavFlight from '../../services/profileServices/DeleteFavFlights';
 
 const formatTime = (utcTimestamp) => {
   if (utcTimestamp) {
@@ -45,7 +46,7 @@ const SavedFlights = () => {
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     labelContext.setErrortext(null);
-    triggerFunctions();
+    await GetUsrFavFlights(authContext, userContext, labelContext);
     setTimeout(() => {
       setRefreshing(false);
     }, 500);
@@ -77,8 +78,8 @@ const SavedFlights = () => {
         <View style={styles.SwipeContainer}>
           <TouchableOpacity
           style={styles.DeleteButton}
-            onPress={e => {
-              onDeleteHandler(e)
+            onPress={() => {
+              onDeleteHandler();
             }}
           >
             <Text style={styles.DeleteTextButton}>
@@ -171,11 +172,10 @@ const SavedFlights = () => {
         data={userContext.favoriteOneWayFlights.concat(userContext.favoriteRoundTripFlights)}
         keyExtractor={item => item._id + ""}
         renderItem={v => renderFavFlights(v, async () => {
-          const err = await deleteItemdata(v.item);
-          if (err !== null) {
-            row[v.index].close();
-            Alert.alert("Error", err?.message);
-          }
+          await DeleteFavFlight(v.item._id, userContext, labelContext);
+          onRefresh();
+          console.log("item: " + v.item._id)
+
         })}
         refreshing={refreshing}
         onRefresh={onRefresh}
