@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URI = '172.20.10.11:3001';
+const API_BASE_URI = '10.0.2.2:3001';
 
 export const addTravInfoToDatabase = async (
   firstname,
