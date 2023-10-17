@@ -7,9 +7,6 @@ const FaveScreenStyle = StyleSheet.create({
         padding: 10,
         backgroundColor: '#f5f5f5',
         color: '#000'
-        // justifyContent: 'center',
-        // alignItems: 'center', 
-
     },
 
     MainItemContainer: {
@@ -19,31 +16,8 @@ const FaveScreenStyle = StyleSheet.create({
         width: '100%',
         borderBottomColor: '#ccc',
         height: 200,
-        marginBottom: 10,
-        // borderRadius: 10,
         borderBottomLeftRadius: 10,
         borderTopLeftRadius: 10
-    },
-    
-    SwipeContainer: {
-        borderBottomWidth: 1,
-        margin: 0,
-        alignContent: 'center',
-        justifyContent: 'center',
-        width: 90,
-        height:200,
-        backgroundColor: '#ff0000',
-        borderBottomRightRadius: 10,
-        borderTopRightRadius: 10,
-        borderBottomColor: '#ccc',
-    },
-    DeleteButton: {
-        backgroundColor: '#ff0000',
-        color: '#fff',
-        borderColor: '#27aae2',
-        width: '100%',
-        alignItems: 'center',
-        marginBottom: 5,
     },
     DeleteTextButton: {
         color: '#fff',
@@ -60,14 +34,6 @@ const FaveScreenStyle = StyleSheet.create({
         marginBottom: 10,
         color: '#000'
     },
-    // InfoContainer: {
-    //     flexDirection: 'column',
-    //     width: '100%',
-    //     height: '40%',
-    //     // justifyContent: 'center',
-    //     alignItems: 'center',
-    //     backgroundColor: 'skyblue'
-    // },
     TimeContainer: {
         width: '100%',
         flexDirection: 'row',
@@ -130,7 +96,6 @@ const FaveScreenStyle = StyleSheet.create({
         right: 60,
         marginTop: 5,
         marginLeft: 50,
-        // fontSize: 20
     },
 
     Price: {
@@ -211,7 +176,76 @@ const FaveScreenStyle = StyleSheet.create({
         backgroundColor: 'red',
 
     },
+    SwipeContainer: {
+        borderBottomWidth: 1,
+        margin: 0,
+        alignContent: 'center',
+        justifyContent: 'center',
+        width: 90,
+        height: 200,
+        backgroundColor: '#ff0000',
+        borderBottomRightRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomColor: '#ccc',
+    },
+    DeleteButton: {
+        backgroundColor: '#ff0000',
+        color: '#fff',
+        borderColor: '#27aae2',
+        width: '100%',
+        alignItems: 'center',
+        marginBottom: 5,
+    },
 
+    backRightBtn: {
+        height: 200,
+        alignItems: 'flex-end',
+        bottom: 0,
+        justifyContent: 'center',
+        position: 'absolute',
+        top: 0,
+        width: 75,
+        paddingRight: 17,
+        right: 0,
+    },
+    backRightBtnLeft: {
+        backgroundColor: '#1f65ff',
+        right: 75,
+        width: 175,
+    },
+    backRightBtnRight: {
+        backgroundColor: 'red',
+        right: 0,
+    },
+    trash: {
+        height: 25,
+        width: 25,
+        marginRight: 7,
+    },
+
+    rowBack: {
+        height: 200,
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        margin: 0,
+        width: '100%',
+        borderBottomLeftRadius: 10,
+        borderTopLeftRadius: 10
+    },
+
+    rowFront: {
+        width: '100%',
+        backgroundColor: '#FFF',
+        height: 60,
+        margin: 0,
+        shadowColor: '#999',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+    },
 
 });
 

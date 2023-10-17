@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, ScrollView, RefreshControl, FlatList, TouchableOpacity, Button, Alert } from 'react-native';
+import { View, Text, ScrollView, RefreshControl, FlatList, TouchableOpacity, Button, Alert, Animated, TouchableHighLight, StatusBar, Pressable } from 'react-native';
+import { SwipeListView } from 'react-native-swipe-list-view';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { useUserContext } from '../../services/UserContext';
 import { useAuthContext } from '../../services/loginServices/AuthContext';
@@ -7,9 +8,11 @@ import { useSignupFormContext } from '../../services/signupServices/SignupLabels
 import IsNotAuthenticated from '../../services/loginServices/IsNotAuthenticated';
 import GetUsrFavFlights from '../../services/profileServices/GetUsrFavFlights';
 import Loader from '../../services/Loader';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import styles from '../../styles/FavScreenStyle';
 import DeleteFavFlight from '../../services/profileServices/DeleteFavFlights';
+import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 
 const formatTime = (utcTimestamp) => {
   if (utcTimestamp) {
@@ -20,6 +23,13 @@ const formatTime = (utcTimestamp) => {
   }
   return '';
 };
+
+// Optional configuration
+const options = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
+
 
 // Helper function to convert airport names to shorter format
 const shortenAirportName = (airportName) => {
@@ -52,6 +62,23 @@ const SavedFlights = () => {
     }, 500);
   }, []);
 
+  const onRefreshRemoval = useCallback(async () => {
+    setRefreshing(true);
+    labelContext.setErrortext(null);
+    Alert.alert('               ' + '\n' + '      Flight removed from favorites!  ', '', [], { cancelable: true, });
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  }, []);
+
+  const onRefreshRemoval2 = useCallback(async () => {
+    setRefreshing(true);
+    labelContext.setErrortext(null);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  }, []);
+
   async function triggerFunctions() {
     await IsNotAuthenticated(labelContext, authContext);
     await GetUsrFavFlights(authContext, userContext, labelContext);
@@ -62,44 +89,145 @@ const SavedFlights = () => {
     onRefresh();
   }, []);
 
-
-
-  const closeRow = index => {
-    if (prevOpenedRow && prevOpenedRow !== row[index]) {
-      prevOpenedRow.close();
+  const closeRow = (rowMap, rowKey) => {
+    if (rowMap[rowKey]) {
+      rowMap[rowKey].closeRow();
     }
-    prevOpenedRow = row[index];
-  }
+  };
 
-  const renderFavFlights = ({ item, index }, onDelete) => {
+  const deleteRow = async (rowMap, rowKey) => {
+    closeRow(rowMap, rowKey);
+    try {
+      await DeleteFavFlight(rowKey, userContext, labelContext);
+      await GetUsrFavFlights(authContext, userContext, labelContext);
+    } catch (error) {
+      console.error("Error deleting row:", error);
+    }
+  };
 
-    const renderRightView = (onDeleteHandler) => {
-      return (
-        <View style={styles.SwipeContainer}>
-          <TouchableOpacity
-          style={styles.DeleteButton}
-            onPress={() => {
-              onDeleteHandler();
-            }}
-          >
-            <Text style={styles.DeleteTextButton}>
-              DELETE
-            </Text>
-          </TouchableOpacity>
-          {/* <Button color="red" onPress={e => {
-            onDeleteHandler(e)
-          }} title="DELETE"></Button> */}
-        </View>
-      );
-    };
+  const onRowDidOpen = rowKey => {
+    console.log('This row opened', rowKey);
+  };
+
+  const onLeftActionStatusChange = rowKey => {
+    console.log('onLeftActionStatusChange', rowKey);
+  };
+
+  const onRightActionStatusChange = rowKey => {
+    console.log('onRightActionStatusChange', rowKey);
+  };
+
+  const onRightAction = rowKey => {
+    console.log('onRightAction', rowKey);
+  };
+
+  const onLeftAction = rowKey => {
+    console.log('onLeftAction', rowKey);
+  };
+
+
+  const ActionItem = props => {
+    const { swipeAnimatedValue, leftActionActivated, rightActionActivated, rowActionAnimatedValue, rowHeightAnimatedValue, onClose, onDelete } = props;
+
+    if (rightActionActivated) {
+      console.log("rightActionActivated " + rightActionActivated)
+      Animated.spring(rowActionAnimatedValue, {
+        toValue: 500,
+        useNativeDriver: false
+      }).start();
+    } else {
+      Animated.spring(rowActionAnimatedValue, {
+        toValue: 75,
+        useNativeDriver: false
+      }).start();
+    }
 
     return (
-      <Swipeable
-        renderRightActions={(progress, dragX) => renderRightView(onDelete)}
-        onSwipeableOpen={() => closeRow(index)}
-        ref={(ref) => (row[index] = ref)}
-        rightOpenValue={-100}
-      >
+      <Animated.View style={[styles.rowBack, { height: rowHeightAnimatedValue }]}>
+        {/* <Text>Left</Text> */}
+        {!leftActionActivated && (
+          <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnLeft]} onPress={onClose}>
+            <Animated.View style={[styles.trash, {
+              transform: [{
+                translateX: swipeAnimatedValue.interpolate({
+                  inputRange: [-150, 0],
+                  outputRange: [0, 150],
+                  extrapolate: 'clamp'
+                }),
+              },
+              ],
+            }]}>
+              <MaterialIcons name='close-circle-outline' size={25} style={styles.trash} color="#fff" />
+            </Animated.View>
+          </TouchableOpacity>
+        )}
+        {!leftActionActivated && (
+          <Animated.View
+            style={[
+              styles.backRightBtn,
+              styles.backRightBtnRight,
+              {
+                flex: 1,
+                width: rowActionAnimatedValue,
+              },
+            ]}>
+            <TouchableOpacity style={[styles.backRightBtn, styles.backRightBtnRight]} onPress={onDelete}>
+              <Animated.View style={[styles.trash, {
+                transform: [{
+                  translateX: swipeAnimatedValue.interpolate({
+                    inputRange: [-150, 0],
+                    outputRange: [0, 75],
+                    extrapolate: 'clamp'
+                  }),
+                },
+                ],
+              }]}>
+                <MaterialIcons name='trash-can-outline' size={30} color="#fff" />
+              </Animated.View>
+            </TouchableOpacity>
+          </Animated.View>
+        )}
+      </Animated.View>
+    )
+  }
+
+  const renderHiddenItem = ({ item, index }, rowMap) => {
+    const rowActionAnimatedValue = new Animated.Value(75);
+    const rowHeightAnimatedValue = new Animated.Value(200);
+    return (
+      <ActionItem
+        rowMap={rowMap}
+        rowActionAnimatedValue={rowActionAnimatedValue}
+        rowHeightAnimatedValue={rowHeightAnimatedValue}
+        onClose={() => closeRow(rowMap, item._id.toString())}
+        onDelete={() => {
+          deleteRow(rowMap, item._id.toString());
+          onRefreshRemoval();
+        }
+        }
+      />
+    );
+  }
+
+
+  const RenderFavFlights = props => {
+    const { rowHeightAnimatedValue, removeRow, item, index, leftActionState, rightActionState } = props;
+    // console.log("rightActionState " + rightActionState)
+    if (rightActionState) {
+      console.log("rightActionState " + rightActionState)
+      ReactNativeHapticFeedback.trigger("impactLight", options);
+      Animated.timing(rowHeightAnimatedValue, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: false,
+      }).start(() => {
+        removeRow();
+        console.log("test")
+      });
+    }
+
+    return (
+      <Animated.View style={[styles.rowFront, { height: rowHeightAnimatedValue }]}>
         <TouchableOpacity>
           <View style={styles.MainItemContainer}>
             <Text style={styles.AirLineTextStyle}>
@@ -159,28 +287,49 @@ const SavedFlights = () => {
             )}
           </View>
         </TouchableOpacity>
-      </Swipeable>
+      </Animated.View >
+    );
+  }
+
+  const renderItem = ({ item, index }, rowMap) => {
+    const rowHeightAnimatedValue = new Animated.Value(200);
+
+    return (
+      <RenderFavFlights
+        rowMap={rowMap}
+        rowHeightAnimatedValue={rowHeightAnimatedValue}
+        removeRow={() => {
+          deleteRow(rowMap, item._id.toString());
+          onRefreshRemoval2();
+        }}
+        item={item}
+      />
     );
   }
 
   return (
     <View style={styles.MainContainerStyle}>
       {labelContext.loading == true ? <Loader loading={userContext.loading} /> : labelContext.loading == false}
-
-      {/* <ScrollView keyboardShouldPersistTaps="handled" refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} progressBackgroundColor={'#27aae2'} />}> */}
-      <FlatList
+      <SwipeListView
         data={userContext.favoriteOneWayFlights.concat(userContext.favoriteRoundTripFlights)}
         keyExtractor={item => item._id + ""}
-        renderItem={v => renderFavFlights(v, async () => {
-          await DeleteFavFlight(v.item._id, userContext, labelContext);
-          onRefresh();
-          console.log("item: " + v.item._id)
-
-        })}
+        renderItem={renderItem}
+        renderHiddenItem={renderHiddenItem}
+        leftOpenValue={75}
+        rightOpenValue={-150}
+        disableRightSwipe
         refreshing={refreshing}
         onRefresh={onRefresh}
+        onRowDidOpen={onRowDidOpen}
+        leftActivationValue={100}
+        rightActivationValue={-250}
+        leftActionValue={0}
+        rightActionValue={-500}
+        onLeftAction={onLeftAction}
+        onRightAction={onRightAction}
+        onLeftActionStatusChange={onLeftActionStatusChange}
+        onRightActionStatusChange={onRightActionStatusChange}
       />
-      {/* </ScrollView> */}
     </View>
   );
 }
