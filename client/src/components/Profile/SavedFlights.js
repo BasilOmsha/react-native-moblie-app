@@ -65,6 +65,7 @@ const SavedFlights = () => {
   const onRefreshRemoval = useCallback(async () => {
     setRefreshing(true);
     labelContext.setErrortext(null);
+    await GetUsrFavFlights(authContext, userContext, labelContext);
     Alert.alert('               ' + '\n' + '      Flight removed from favorites!  ', '', [], { cancelable: true, });
     setTimeout(() => {
       setRefreshing(false);
@@ -74,6 +75,7 @@ const SavedFlights = () => {
   const onRefreshRemoval2 = useCallback(async () => {
     setRefreshing(true);
     labelContext.setErrortext(null);
+    await GetUsrFavFlights(authContext, userContext, labelContext);
     setTimeout(() => {
       setRefreshing(false);
     }, 500);
@@ -99,7 +101,6 @@ const SavedFlights = () => {
     closeRow(rowMap, rowKey);
     try {
       await DeleteFavFlight(rowKey, userContext, labelContext);
-      await GetUsrFavFlights(authContext, userContext, labelContext);
     } catch (error) {
       console.error("Error deleting row:", error);
     }
