@@ -15,6 +15,11 @@ const FlightReturnDetails = ({navigation}) => {
   console.log('====================================');
   return (
     <View>
+      <Button
+        title="Buy"
+        onPress={() => {
+          navigation.navigate('Traveler info');
+        }}></Button>
       <FlatList
         data={selectedData}
         renderItem={({item, index}) => (

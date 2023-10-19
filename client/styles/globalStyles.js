@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { Directions } from 'react-native-gesture-handler';
+import {Directions} from 'react-native-gesture-handler';
 
 export const styles = StyleSheet.create({
   container: {
@@ -215,7 +215,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     backgroundColor: '#27aae2',
-    padding: 12,
+    padding: 10,
     width: 121,
     textAlign: 'center',
     borderBottomLeftRadius: 8,
@@ -226,7 +226,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     backgroundColor: '#27aae2',
-    padding: 12,
+    padding: 10,
     width: 121,
     textAlign: 'center',
     color: 'white',
@@ -235,7 +235,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     backgroundColor: '#27aae2',
-    padding: 12,
+    padding: 10,
     width: 121,
     textAlign: 'center',
     borderBottomRightRadius: 8,

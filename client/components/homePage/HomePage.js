@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Modal,
   Image,
+  Alert,
 } from 'react-native';
 import {fetchLocations} from '../../services/searchServices';
 import {airlines, flightDurations24H, stops} from '../../data/data';
@@ -22,7 +23,7 @@ import {useSignupFormContext} from '../../src/services/signupServices/SignupLabe
 import {useUserContext} from '../../src/services/UserContext';
 import GetUserData from '../../src/services/profileServices/GetUserData';
 import CalendarPicker from 'react-native-calendar-picker';
-
+import {validateInputsHome} from './validation';
 function HomePage({navigation}) {
   const [from, setFrom] = useState('Copenhagen');
   const [to, setTo] = useState('Helsinki');
@@ -84,10 +85,10 @@ function HomePage({navigation}) {
   };
 
   const clearData = () => {
-    setDate('');
+    setDate(null);
     setFrom('');
     setTo('');
-    setReturnDate('');
+    setReturnDate(null);
     setSelectedAirline('');
     setIsSelectedDuration('');
     setSelectedStops('');
@@ -123,6 +124,10 @@ function HomePage({navigation}) {
   };
 
   const fetchData = async () => {
+    if (!validateInputsHome(from, to, date)) {
+      Alert.alert('Validation Error', 'All fields are required');
+      return;
+    }
     try {
       setLoading(true);
       setIsModalLoading(true);
@@ -153,7 +158,7 @@ function HomePage({navigation}) {
         });
 
         setIsModalLoading(false);
-      }, 6000);
+      }, 1000);
     } catch (error) {
       console.error('Error fetching locations:', error);
     }
@@ -222,7 +227,16 @@ function HomePage({navigation}) {
           marginLeft: 10,
         }}>
         <TouchableOpacity onPress={toggleAirlines}>
-          <Text style={styles.filterHeaderA}>Airlines</Text>
+          <Text style={styles.filterHeaderA}>
+            <Image
+              style={{
+                height: 22,
+                width: 22,
+              }}
+              source={require('../../assets/setting-2.png')}
+            />{' '}
+            Airlines
+          </Text>
         </TouchableOpacity>
         <Modal visible={isSelectedAirline} transparent={true}>
           <ModalScrollView
@@ -232,7 +246,17 @@ function HomePage({navigation}) {
           />
         </Modal>
         <TouchableOpacity onPress={handleDurationToggle}>
-          <Text style={styles.filterHeaderD}>Duration</Text>
+          <Text style={styles.filterHeaderD}>
+            {' '}
+            <Image
+              style={{
+                height: 22,
+                width: 22,
+              }}
+              source={require('../../assets/setting-2.png')}
+            />{' '}
+            Duration
+          </Text>
         </TouchableOpacity>
         <Modal visible={isDurationModalVisible} transparent={true}>
           <ModalScrollView
@@ -242,7 +266,17 @@ function HomePage({navigation}) {
           />
         </Modal>
         <TouchableOpacity onPress={toggleStopsModal}>
-          <Text style={styles.filterHeaderS}>Stops</Text>
+          <Text style={styles.filterHeaderS}>
+            {' '}
+            <Image
+              style={{
+                height: 22,
+                width: 22,
+              }}
+              source={require('../../assets/setting-2.png')}
+            />{' '}
+            Stops
+          </Text>
         </TouchableOpacity>
         <Modal visible={isStopsModalVisible} transparent={true}>
           <ModalScrollView
@@ -257,14 +291,14 @@ function HomePage({navigation}) {
         style={styles.destinationFrom}
         placeholder={` 🛫  From : Please enter city...`}
         value={from}
-        onChangeText={text => setFrom(capitalizeFirstLetter(text))}
+        onChangeText={text => setFrom(capitalizeFirstLetter(text.trim()))}
       />
 
       <TextInput
         style={styles.destinationTo}
         placeholder={` 🛬  To : Please enter city...`}
         value={to}
-        onChangeText={text => setTo(capitalizeFirstLetter(text))}
+        onChangeText={text => setTo(capitalizeFirstLetter(text.trim()))}
       />
       <TouchableOpacity onPress={handleSwitch}>
         <Text style={styles.switch}>🔄</Text>

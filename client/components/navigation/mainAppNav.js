@@ -15,6 +15,8 @@ import changePaswdNav from '../../src/components/Navigation/ChangePaswdNav';
 import {useAuthContext} from '../../src/services/loginServices/AuthContext';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {ConfirmationPage} from '../ticketPurchase/confirmation';
+import {VisaPayment} from '../../visa/visa';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -55,6 +57,8 @@ const HomeStackScreen = () => (
     <Stack.Screen name="One-way details" component={FlightDetails} />
     <Stack.Screen name="Round trip details" component={FlightReturnDetails} />
     <Stack.Screen name="Traveler info" component={TicketPurchase} />
+    <Stack.Screen name="Confirmation page" component={ConfirmationPage} />
+    <Stack.Screen name="Visa Payment" component={VisaPayment} />
   </Stack.Navigator>
 );
 
