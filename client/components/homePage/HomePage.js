@@ -158,7 +158,7 @@ function HomePage({navigation}) {
         });
 
         setIsModalLoading(false);
-      }, 1000);
+      }, 5000);
     } catch (error) {
       console.error('Error fetching locations:', error);
     }
