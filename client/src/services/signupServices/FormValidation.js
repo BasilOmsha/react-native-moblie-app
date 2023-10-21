@@ -14,8 +14,8 @@ const updateError = (error, updateState) => {
 const FormValidation3 = async (userObject, setErrors) => {
     const { day, month, year } = userObject;
     try {
-        // let response = await fetch("http://10.0.2.2:3000/rest/services/clientValidation",
-        let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/clientValidation",
+        let response = await fetch("http://10.0.2.2:3000/rest/services/clientValidation",
+        // let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/clientValidation",
             {
                 method: 'POST',
                 headers: {

@@ -10,8 +10,8 @@ const delay = ms => new Promise(
 const CheckCurrent = async (userContext, labelContext) => {
     labelContext.setLoading(true);
     try {
-        // let response = await fetch("http://10.0.2.2:3000/rest/services/checkpswd", {
-            let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/checkpswd", {
+        let response = await fetch("http://10.0.2.2:3000/rest/services/checkpswd", {
+            // let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/checkpswd", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

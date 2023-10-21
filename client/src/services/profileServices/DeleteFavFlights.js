@@ -15,8 +15,8 @@ const DeleteFavFlight = async (flightID, userContext, labelContext) => {
         "_id": flightID
     }
     try {
-        // let response = await fetch("http://10.0.2.2:3000/rest/services/deletefavFlight", {
-            let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/deletefavFlight", {
+        let response = await fetch("http://10.0.2.2:3000/rest/services/deletefavFlight", {
+            // let response = await fetch("https://flightbookingserver.lm.r.appspot.com/rest/services/deletefavFlight", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
